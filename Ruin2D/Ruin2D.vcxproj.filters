@@ -1,0 +1,169 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Data">
+      <UniqueIdentifier>{508c702d-ba7f-4dcb-bf2a-7850b0c0ae59}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Window">
+      <UniqueIdentifier>{00016db2-7c6c-4781-a3d7-8aea7541f495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{86d4d69b-ba34-4e5f-9f40-6c69667aab17}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Utility">
+      <UniqueIdentifier>{89f17088-d5bb-4c1c-ac26-25e8145e72e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{225a619e-ab36-401f-86c1-589097cb6999}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States">
+      <UniqueIdentifier>{078de3a1-a125-4422-b5db-ed1a03ceb526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\LocalMap">
+      <UniqueIdentifier>{e124bfd4-0351-488c-aa34-2761cbf74b6a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\WorldMap">
+      <UniqueIdentifier>{6c573d4f-590b-450c-b915-644896defb12}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="States\Battle">
+      <UniqueIdentifier>{7b305e30-e2e7-49e0-9585-23cef4c3600e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Maps">
+      <UniqueIdentifier>{8e45a87b-76fa-45dd-959b-5d658c0c0512}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Characters">
+      <UniqueIdentifier>{7ca7f81a-265d-4b2d-93f5-2420a5c0628f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Data\Resources">
+      <UniqueIdentifier>{7772ac21-a914-465d-9f82-2991fe68a1e0}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Assert.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Engine</Filter>
+    </ClInclude>
+    <ClInclude Include="Graphics.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="WindowManager.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Camera.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Window</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectBuffer.h">
+      <Filter>Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalMapState.h">
+      <Filter>States\LocalMap</Filter>
+    </ClInclude>
+    <ClInclude Include="GameStateMachine.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="BootState.h">
+      <Filter>States</Filter>
+    </ClInclude>
+    <ClInclude Include="LocalMapData.h">
+      <Filter>Data\Maps</Filter>
+    </ClInclude>
+    <ClInclude Include="DataManager.h">
+      <Filter>Data</Filter>
+    </ClInclude>
+    <ClInclude Include="EntityData.h">
+      <Filter>Data\Characters</Filter>
+    </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Data\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TileSet.h">
+      <Filter>Data\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Font.h">
+      <Filter>Data\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Data\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMap.h">
+      <Filter>Data\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Utility</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Main.cpp" />
+    <ClCompile Include="Engine.cpp">
+      <Filter>Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="Graphics.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="WindowManager.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Camera.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Window</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Utility</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="GameStateMachine.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="BootState.cpp">
+      <Filter>States</Filter>
+    </ClCompile>
+    <ClCompile Include="EntityData.cpp">
+      <Filter>Data\Characters</Filter>
+    </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Data\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TileSet.cpp">
+      <Filter>Data\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Font.cpp">
+      <Filter>Data\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Data\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMap.cpp">
+      <Filter>Data\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="DataManager.cpp">
+      <Filter>Data</Filter>
+    </ClCompile>
+    <ClCompile Include="LocalMapState.cpp">
+      <Filter>States\LocalMap</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
