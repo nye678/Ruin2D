@@ -1,13 +1,13 @@
-#ifndef __RUIN2D_BOOTSTATE_H_
-#define __RUIN2D_BOOTSTATE_H_
+#ifndef __RUIN2DGAME_BOOTSTATE_H_
+#define __RUIN2DGAME_BOOTSTATE_H_
 
-#include "DataManager.h"
+#include "AllGameData.h"
 #include "GameStateMachine.h"
 #include "LocalMapState.h"
 
-namespace Ruin2D
+namespace Ruin2DGame
 {
-	class BootState : public GameState
+	class BootState : public Ruin2D::GameState
 	{
 	public:
 		virtual void Update(double deltaTime);

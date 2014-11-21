@@ -9,7 +9,7 @@ Sprite::Sprite()
 Sprite Sprite::Load(const std::string &filepath, int frameWidth, int frameHeight, int rows, int cols)
 {
 	Sprite sprite;
-	//sprite._tileSet = TileSet::Load(filepath, frameWidth, frameHeight, rows, cols);
+	sprite._tileSet = TileSet::Load(filepath, frameWidth, frameHeight, rows, cols);
 
 	return sprite;
 }
@@ -37,5 +37,5 @@ void Sprite::SetDirection(int dir)
 void Sprite::DrawSprite(const glm::vec2 &position)
 {
 	auto graphics = Graphics::Get();
-	graphics->DrawTile(_tileSet, _currentFrame + _tileSet.Columns() * _direction, position, 4);
+	graphics->DrawTile(_tileSet, _currentFrame + _tileSet.Columns() * _direction, position, 2);
 }

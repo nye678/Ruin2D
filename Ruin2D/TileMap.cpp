@@ -127,7 +127,8 @@ TileMap TileMap::Parse(const Document &doc)
 
 		for (int dataIndex = 0; dataIndex < data.Size(); ++dataIndex)
 		{
-			layer->tiles[dataIndex] = (short)(data[dataIndex].GetInt() - 1);
+			short tile = (short)(data[dataIndex].GetInt() - 1);
+			layer->tiles[dataIndex] = (short)(tile);
 		}
 	}
 

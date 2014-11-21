@@ -1,6 +1,7 @@
 #include "BootState.h"
 
 using namespace Ruin2D;
+using namespace Ruin2DGame;
 
 BootState::BootState()
 	: GameState(StateType::Boot)
@@ -8,12 +9,11 @@ BootState::BootState()
 
 void BootState::Update(double deltaTime)
 {
-	auto dm = DataManager::Get();
-	dm->LoadLocalMap("D:\\Projects\\Ruin2D\\Data\\Maps\\testmap.json");
+	AllData::LoadAllData();
 
 	auto gsm = GameStateMachine::Get();
 	gsm->PopState();
-	gsm->PushState(new LocalMapState(dm->GetLocalMap("testmap")));
+	gsm->PushState(new LocalMapState(AllData::TestMap));
 }
 
 void BootState::Render()

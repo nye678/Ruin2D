@@ -28,6 +28,17 @@ void Camera::SetPosition(const vec2 &position)
 	_dirty = true;
 }
 
+void Camera::SetCenterPosition(const glm::vec2 &position)
+{
+	auto windowSize = WindowManager::Get()->GetSize();
+	_position.x = -position.x;
+	_position.y = position.y;
+	_position.x += windowSize.x / (2.0f * _zoom);
+	_position.y -= windowSize.y / (2.0f * _zoom);
+	_dirty = true;
+
+}
+
 void Camera::Move(const vec2 &amount)
 {
 	_position += amount;

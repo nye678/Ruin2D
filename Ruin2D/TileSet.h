@@ -27,6 +27,8 @@ namespace Ruin2D
 
 	public:
 		static TileSet Parse(const std::string &filepath, const rapidjson::Document &doc, int setIndex);
+		
+		static TileSet Load(const std::string &filepath, int tileWidth, int tileHeight, int rows, int columns);
 
 		GLuint Handle() const;
 

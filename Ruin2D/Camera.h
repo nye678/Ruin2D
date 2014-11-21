@@ -34,6 +34,8 @@ namespace Ruin2D
 
 		void SetPosition(const glm::vec2 &);
 
+		void SetCenterPosition(const glm::vec2 &);
+
 		void Move(const glm::vec2 &);
 
 		void Move(float x, float y);

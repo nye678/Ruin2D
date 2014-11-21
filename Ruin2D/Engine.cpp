@@ -25,9 +25,6 @@ void Engine::Initialize()
 	InputManager::Create();
 
 	auto gsm = GameStateMachine::Create();
-	gsm->PushState(new BootState());
-
-	auto data = DataManager::Create();
 }
 
 void Engine::Run()
@@ -43,9 +40,9 @@ void Engine::Run()
 	while (!windowManager->CloseRequested())
 	{
 		time = glfwGetTime();
-		delta += time - prev;
+		delta = time - prev;
 		prev = time;
-
+		
 		gsm->Update(delta);
 		
 		graphics->StartBatch();

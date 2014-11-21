@@ -18,6 +18,7 @@ namespace Ruin2D
 		struct MapLayer
 		{
 			short* tiles;
+			char* tileType;
 			int width;
 			int height;
 			int x;

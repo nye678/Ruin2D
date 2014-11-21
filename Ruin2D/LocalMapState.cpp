@@ -1,6 +1,7 @@
 #include "LocalMapState.h"
 
 using namespace Ruin2D;
+using namespace Ruin2DGame;
 
 LocalMapState::LocalMapState(LocalMapData* data)
 	: GameState(StateType::Local), _data(data)
@@ -50,28 +51,39 @@ void LocalMapState::Update(double deltaTime)
 
 	auto camera = Camera::Get();
 	auto moveVec = glm::vec2(0.0, 0.0);
-	double speed = 5.0;
+	double speed = 2.0;
 	if (up)
 	{
 		moveVec.y = -speed;
+		AllData::PlayerSprite.SetDirection(1);
 	}
 
 	if (left)
 	{
-		moveVec.x = speed;
+		moveVec.x = -speed;
+		AllData::PlayerSprite.SetDirection(2);
 	}
 
 	if (down)
 	{
 		moveVec.y = speed;
+		AllData::PlayerSprite.SetDirection(0);
 	}
 
 	if (right)
 	{
-		moveVec.x = -speed;
+		moveVec.x = speed;
+		AllData::PlayerSprite.SetDirection(3);
 	}
 
-	camera->Move(moveVec);
+	if (up || left || down || right)
+	{
+		AllData::PlayerSprite.StepFrame(deltaTime);
+	}
+
+	//camera->Move(moveVec);
+	AllData::PlayerPos += moveVec;
+	camera->SetCenterPosition(AllData::PlayerPos);
 }
 
 void LocalMapState::Render()
@@ -85,7 +97,7 @@ void LocalMapState::Render()
 
 		_data->tileMap.DrawBackgroundLayers(_data->tileSet, cameraViewRect);
 
-		// Draw sprite layers.
+		AllData::PlayerSprite.DrawSprite(AllData::PlayerPos);
 
 		_data->tileMap.DrawForegroundLayers(_data->tileSet, cameraViewRect);
 	}

@@ -70,3 +70,15 @@ TileSet TileSet::Parse(const string& filepath, const rapidjson::Document &doc, i
 
 	return tileSet;
 }
+
+TileSet TileSet::Load(const string &filepath, int tileWidth, int tileHeight, int rows, int columns)
+{
+	TileSet tileSet;
+	tileSet._tileWidth = tileWidth;
+	tileSet._tileHeight = tileHeight;
+	tileSet._rows = rows;
+	tileSet._columns = columns;
+	tileSet._texture = Texture::Load(filepath);
+
+	return tileSet;
+}

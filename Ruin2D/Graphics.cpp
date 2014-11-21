@@ -253,17 +253,26 @@ void Graphics::Render()
 	auto textureBuckets = std::vector<std::tuple<GLuint, GLint, int>>();
 	GLuint currentTexture = spriteItor->texture;
 	GLint currentUnit = spriteItor->unit;
-	int index = 0, prevIndex = 0;
+	int index = 0, prevIndex = 0, count = 0;
 
 	for (; spriteItor != drawBatch.end(); ++spriteItor)
 	{
+		if (spriteItor->texture != currentTexture)
+		{
+			textureBuckets.push_back(tuple<GLuint, GLint, int>(currentTexture, currentUnit, count));
+			currentTexture = spriteItor->texture;
+			currentUnit = spriteItor->unit;
+			count = 0;
+		}
+
 		memcpy(transforms + index, value_ptr(spriteItor->transform), sizeof(mat4));
 		memcpy(uvs + index, value_ptr(spriteItor->uv), sizeof(mat3));
 		++index;
+		++count;
 	}
 
 	// Push the final texture group.
-	textureBuckets.push_back(tuple<GLuint, GLint, int>(currentTexture, currentUnit, index));
+	textureBuckets.push_back(tuple<GLuint, GLint, int>(currentTexture, currentUnit, count));
 
 	glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
 	glUnmapBuffer(GL_ARRAY_BUFFER);
@@ -284,9 +293,9 @@ void Graphics::Render()
 		GLint unit = std::get<1>(pair);
 		int count = std::get<2>(pair);
 
-		glBindTexture(GL_TEXTURE_2D, texture);
+		glUniform1i(textureLoc, unit);
 		glActiveTexture(GL_TEXTURE0 + unit);
-		//glUniform1i(textureLoc, unit);
+		glBindTexture(GL_TEXTURE_2D, texture);
 
 		glDrawArraysInstancedBaseInstance(GL_TRIANGLE_FAN, 0, 4, count, baseInstance);
 		baseInstance += count;

@@ -1,7 +1,6 @@
 #ifndef __RUIN2D_ENGINE_H_
 #define __RUIN2D_ENGINE_H_
 
-#include "BootState.h"
 #include "Camera.h"
 #include "Graphics.h"
 #include "InputManager.h"

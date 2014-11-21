@@ -1,14 +1,15 @@
-#ifndef __RUIN2D_LOCALMAPSTATE_H_
-#define __RUIN2D_LOCALMAPSTATE_H_
+#ifndef __RUIN2DGAME_LOCALMAPSTATE_H_
+#define __RUIN2DGAME_LOCALMAPSTATE_H_
 
 #include "GameStateMachine.h"
 #include "Graphics.h"
 #include "InputManager.h"
 #include "LocalMapData.h"
+#include "AllGameData.h"
 
-namespace Ruin2D
+namespace Ruin2DGame
 {
-	class LocalMapState : public GameState
+	class LocalMapState : public Ruin2D::GameState
 	{
 	private:
 		LocalMapData* _data;
