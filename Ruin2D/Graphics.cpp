@@ -153,7 +153,6 @@ void Graphics::EndBatch()
 	if (drawBatch.size() > 0)
 	{
 		sort(drawBatch.begin(), drawBatch.end(), DrawInfoCompare());
-		
 		Render();
 	}
 
@@ -172,7 +171,8 @@ void Graphics::Draw(const Texture &texture, const glm::vec2 &position, double or
 	transform = translate(transform, vec3(-0.5f, 0.5f, 0.0f));
 
 	DrawInfo info;
-	info.key = layer;
+	info.key = 0;
+	info.zOrder = layer;
 	info.texture = texture.Unit();
 	info.transform = transform;
 	info.uv = mat3(1.0f);
@@ -210,6 +210,7 @@ void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const vec2 &posit
 
 	DrawInfo info;
 	info.key = 0;
+	info.zOrder = 0;
 	info.texture = tileSet.Handle();
 	info.unit = tileSet.Unit();
 	info.transform = transform;
@@ -227,7 +228,8 @@ void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const vec2 &posit
 	transform = glm::scale(transform, vec3(textureScale, 1.0f));
 
 	DrawInfo info;
-	info.key = layer;
+	info.key = layer > 0 ? (((DrawKey)layer) << 48) | (DrawKey)ceil(position.y + tileSet.TileHeight()) : 0;
+	info.zOrder = layer;
 	info.texture = tileSet.Handle();
 	info.unit = tileSet.Unit();
 	info.transform = transform;

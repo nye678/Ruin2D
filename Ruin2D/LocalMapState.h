@@ -1,6 +1,7 @@
 #ifndef __RUIN2DGAME_LOCALMAPSTATE_H_
 #define __RUIN2DGAME_LOCALMAPSTATE_H_
 
+#include <cmath>
 #include "GameStateMachine.h"
 #include "Graphics.h"
 #include "InputManager.h"

@@ -28,6 +28,7 @@ namespace Ruin2D
 		struct DrawInfo
 		{
 			DrawKey key;
+			int zOrder;
 			GLuint texture;
 			GLint unit;
 			glm::mat4 transform;
@@ -38,7 +39,7 @@ namespace Ruin2D
 		{
 			inline bool operator() (const DrawInfo &lhs, const DrawInfo &rhs)
 			{
-				return (lhs.key < rhs.key);
+				return lhs.key < rhs.key;
 			}
 		};
 

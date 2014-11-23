@@ -25,6 +25,7 @@ namespace Ruin2D
 			int y;
 
 			bool visible;
+			bool regionLayer;
 			std::string name;
 		};
 
@@ -49,10 +50,11 @@ namespace Ruin2D
 
 		glm::ivec2 PointToGridCoords(int x, int y);
 
+	public:
 		glm::vec2 GridToWorld(int row, int col);
 
 		glm::ivec2 WorldToGrid(double x, double y);
-	public:
+
 		static TileMap Parse(const rapidjson::Document &doc);
 
 		std::string Name() const;

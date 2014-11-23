@@ -53,7 +53,7 @@ glm::vec2 TileMap::GridToWorld(int row, int col)
 
 glm::ivec2 TileMap::WorldToGrid(double x, double y)
 {
-	return glm::vec2((float)x / _tilewidth, (float)y / _tileheight);
+	return glm::ivec2((float)x / _tilewidth, (float)y / _tileheight);
 }
 
 void TileMap::DrawForegroundLayers(const TileSet &tileSet, const glm::ivec4 &rect)
@@ -75,18 +75,21 @@ void TileMap::DrawMapSection(const TileSet &tileSet, const glm::ivec4 &rect, int
 	if (layerIndex < _numlayers)
 	{
 		MapLayer* layer = &_layers[layerIndex];
-		for (int row = firstRow; row < lastRow; ++row)
+		if (!layer->regionLayer && layer->visible)
 		{
-			for (int col = firstCol; col < lastCol; ++col)
+			for (int row = firstRow; row < lastRow; ++row)
 			{
-				int index = GetIndex(row, col);
-				if (index >= 0 && index < _width * _height)
+				for (int col = firstCol; col < lastCol; ++col)
 				{
-					int tileIndex = layer->tiles[index];
-					if (tileIndex >= 0)
+					int index = GetIndex(row, col);
+					if (index >= 0 && index < _width * _height)
 					{
-						auto position = GridToWorld(row, col);
-						graphics->DrawTile(tileSet, tileIndex, position, layerIndex);
+						int tileIndex = layer->tiles[index];
+						if (tileIndex >= 0)
+						{
+							auto position = GridToWorld(row, col);
+							graphics->DrawTile(tileSet, tileIndex, position, layerIndex);
+						}
 					}
 				}
 			}
@@ -107,6 +110,7 @@ TileMap TileMap::Parse(const Document &doc)
 	tileMap._name = properties["name"].GetString();
 	
 	const Value &layers = doc["layers"];
+
 	tileMap._numlayers = layers.Size();
 	tileMap._layers = new MapLayer[tileMap._numlayers];
 
@@ -115,6 +119,17 @@ TileMap TileMap::Parse(const Document &doc)
 		MapLayer* layer = &tileMap._layers[layerIndex];
 
 		const Value &layerdoc = layers[layerIndex];
+		const Value &layerProperties = layerdoc["properties"];
+
+		if (!layerProperties.IsNull())
+		{
+			layer->regionLayer = layerProperties["regionLayer"].GetString() == "true";
+		}
+		else
+		{
+			layer->regionLayer = false;
+		}
+
 		layer->width = layerdoc["width"].GetInt();
 		layer->height = layerdoc["height"].GetInt();
 		layer->x = layerdoc["x"].GetInt();

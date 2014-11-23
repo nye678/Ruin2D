@@ -108,11 +108,11 @@
     <ClInclude Include="LocalMapData.h">
       <Filter>Game\Data</Filter>
     </ClInclude>
-    <ClInclude Include="Sprite.h">
-      <Filter>Game\Data</Filter>
-    </ClInclude>
     <ClInclude Include="TextureManager.h">
       <Filter>Engine\Graphics</Filter>
+    </ClInclude>
+    <ClInclude Include="Sprite.h">
+      <Filter>Engine\Data\Characters</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -168,11 +168,11 @@
     <ClCompile Include="LocalMapData.cpp">
       <Filter>Game\Data</Filter>
     </ClCompile>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Game\Data</Filter>
-    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
       <Filter>Engine\Graphics</Filter>
+    </ClCompile>
+    <ClCompile Include="Sprite.cpp">
+      <Filter>Engine\Data\Characters</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -13,6 +13,7 @@ namespace Ruin2DGame
 
 		static Ruin2D::Sprite PlayerSprite;
 		static glm::vec2 PlayerPos;
+		static short PlayerLayer;
 
 		static void LoadAllData();
 	};

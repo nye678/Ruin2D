@@ -47,6 +47,16 @@ void LocalMapState::Update(double deltaTime)
 			else if (inputEvent.action == GLFW_RELEASE)
 				right = false;
 		}
+
+		if (inputEvent.key == GLFW_KEY_UP && inputEvent.action == GLFW_RELEASE)
+		{
+			AllData::PlayerLayer += 1;
+		}
+
+		if (inputEvent.key == GLFW_KEY_DOWN && inputEvent.action == GLFW_RELEASE)
+		{
+			AllData::PlayerLayer = glm::max(AllData::PlayerLayer - 1, 0);
+		}
 	}
 
 	auto camera = Camera::Get();
@@ -97,7 +107,11 @@ void LocalMapState::Render()
 
 		_data->tileMap.DrawBackgroundLayers(_data->tileSet, cameraViewRect);
 
-		AllData::PlayerSprite.DrawSprite(AllData::PlayerPos);
+		auto playerGridLoc = _data->tileMap.WorldToGrid(AllData::PlayerPos.x, AllData::PlayerPos.y);
+		auto playerWorldGrid = _data->tileMap.GridToWorld(playerGridLoc.y, playerGridLoc.x);
+
+		Graphics::Get()->DrawTile(_data->tileSet, 960, playerWorldGrid, 100);
+		AllData::PlayerSprite.DrawSprite(AllData::PlayerPos, AllData::PlayerLayer);
 
 		_data->tileMap.DrawForegroundLayers(_data->tileSet, cameraViewRect);
 	}
