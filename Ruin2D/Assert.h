@@ -1,51 +1,45 @@
 #ifndef __RUIN2D_ASSERT_H_
 #define __RUIN2D_ASSERT_H_
 
+#include <Windows.h>
+
 #ifdef _DEBUG
-#include <cassert>
-#include <cstdio>
-#include <functional>
-
-#define Assert_Equal(actual, expected, message)\
-{\
-	if ((actual) != (expected))\
-	{\
-		fprintf(stderr, "Assertion has failed at %s:%s in function %s\n", __FILE__, __LINE__, __FUNCTION__);\
-		fprintf(stderr, "Expected %s, but was %s.\n", #expected, #actual);\
-		fprintf(stderr, "%s\n", (message));\
-		abort();\
-	}\
+#define Assert(condition, message) \
+{ \
+	if (!(condition)) \
+	{ \
+		char msgBuffer[1024];\
+		sprintf_s(msgBuffer, 1024, "An assertion has failed at %s:%d\n\n%s", __FILE__, __LINE__, message);\
+		int dialogResult = MessageBox(nullptr, msgBuffer, "Assertion!", MB_ABORTRETRYIGNORE | MB_ICONERROR);\
+		\
+		switch (dialogResult)\
+		{\
+		case IDABORT:\
+			exit(1);\
+			break;\
+		case IDRETRY:\
+			__debugbreak();\
+			break;\
+		case IDIGNORE:\
+		\
+			break;\
+		}\
+	} \
 }
 
-#define Assert_NotEqual(actual, expected, message)\
+#define Assert_NotNull(pointer, message) \
 {\
-	if ((actual) == (expected))\
-	{\
-		fprintf(stderr, "Assertion has failed at %s:%s in function %s\n", __FILE__, __LINE__, __FUNCTION__);\
-		fprintf(stderr, "Expected %s, but was %s.\n", #expected, #actual);\
-		fprintf(stderr, "%s\n", (message));\
-		abort();\
-	}\
+	Assert((pointer != nullptr), message); \
 }
 
-#define Assert_True(condition, message) Assert_Equal((condition), true, message)
-#define Assert_False(condition, message) Assert_Equal((condition), false, message)
-#define Assert_Null(pointer, message) Assert_Equal(pointer, nullptr, message)
-#define Assert_NotNull(pointer, message) Assert_NotEqual(pointer, nullptr, message)
-
-#define Assert_Fail(message)\
-{\
-	fprintf(stderr, "%s\n", (message));\
-	abort();\
-}
+#define Assert_Fail(message) Assert(false, message)
 
 #else
-#define Assert_Equal(actual, expected, message)
-#define Assert_NotEqual(actual, expected, message)
-#define Assert_True(condition, message)
-#define Assert_False(condtion, message)
-#define Assert_Null(pointer, message)
-#define Assert_NotNull(pointer, message)
+#define Assert(condition, message) (condition)
+
+#define Assert_NotNull(pointer, message) (pointer)
+
+#define Assert_Fail(message) 
 #endif
 
 #endif

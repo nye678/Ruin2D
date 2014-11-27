@@ -91,6 +91,16 @@ layout (location = 1) in vec3 tex_coords;
 uniform mat4 transform;
 uniform mat4 camera;
 
+layout (binding = 2, std430) uniform TextureInfoBlock
+{
+	short width;
+	short height;
+	short tileWidth;
+	short tileHeight;
+	short rows
+	short cols
+} textureInfo[];
+
 out VS_OUT
 {
 	vec3 tex_coords;
@@ -252,7 +262,7 @@ void Graphics::Render()
 	mat3* uvs = static_cast<mat3*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 
 	auto spriteItor = drawBatch.begin();
-	auto textureBuckets = std::vector<std::tuple<GLuint, GLint, int>>();
+	auto textureBuckets = std::vector<DrawCmd>();
 	GLuint currentTexture = spriteItor->texture;
 	GLint currentUnit = spriteItor->unit;
 	int index = 0, prevIndex = 0, count = 0;
@@ -261,7 +271,7 @@ void Graphics::Render()
 	{
 		if (spriteItor->texture != currentTexture)
 		{
-			textureBuckets.push_back(tuple<GLuint, GLint, int>(currentTexture, currentUnit, count));
+			textureBuckets.push_back(DrawCmd(currentTexture, currentUnit, count));
 			currentTexture = spriteItor->texture;
 			currentUnit = spriteItor->unit;
 			count = 0;
@@ -274,7 +284,7 @@ void Graphics::Render()
 	}
 
 	// Push the final texture group.
-	textureBuckets.push_back(tuple<GLuint, GLint, int>(currentTexture, currentUnit, count));
+	textureBuckets.push_back(DrawCmd(currentTexture, currentUnit, count));
 
 	glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
 	glUnmapBuffer(GL_ARRAY_BUFFER);
@@ -287,20 +297,16 @@ void Graphics::Render()
 	Camera::Get()->UpdateCameraView(cameraLoc);
 
 	int baseInstance = 0;
-	Assert_True(textureBuckets.size() < 100, "Exceeded command buffer size.");
+	Assert(textureBuckets.size() < 100, "Exceeded command buffer size.");
 	int drawCount = 0;
-	for (auto pair : textureBuckets)
+	for (auto cmd : textureBuckets)
 	{
-		GLuint texture = std::get<0>(pair);
-		GLint unit = std::get<1>(pair);
-		int count = std::get<2>(pair);
+		glUniform1i(textureLoc, cmd.unit);
+		glActiveTexture(GL_TEXTURE0 + cmd.unit);
+		glBindTexture(GL_TEXTURE_2D, cmd.texture);
 
-		glUniform1i(textureLoc, unit);
-		glActiveTexture(GL_TEXTURE0 + unit);
-		glBindTexture(GL_TEXTURE_2D, texture);
-
-		glDrawArraysInstancedBaseInstance(GL_TRIANGLE_FAN, 0, 4, count, baseInstance);
-		baseInstance += count;
+		glDrawArraysInstancedBaseInstance(GL_TRIANGLE_FAN, 0, 4, cmd.count, baseInstance);
+		baseInstance += cmd.count;
 		drawCount++;
 	}
 }

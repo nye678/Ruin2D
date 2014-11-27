@@ -26,7 +26,7 @@ void Font::InitializeFreeType()
 	FT_Error error;
 
 	error = FT_Init_FreeType(&FreeType);
-	Assert_False(error, "Failed to initialize the freetype library.");
+	Assert(!error, "Failed to initialize the freetype library.");
 
 	FreeTypeInitialized = true;
 }
@@ -35,8 +35,8 @@ void Font::ConstructFontTexture(const string &filepath)
 {
 	FT_Error error;
 	error = FT_New_Face(FreeType, filepath.c_str(), 0, &Face);
-	Assert_NotEqual(error, FT_Err_Unknown_File_Format, "FreeType doesn't recognize the supplied error format.");
-	Assert_False(error, "FreeType failed to load the font!");
+	Assert(error != (FT_Error)FT_Err_Unknown_File_Format, "FreeType doesn't recognize the supplied error format.");
+	Assert(!error, "FreeType failed to load the font!");
 	FT_Set_Pixel_Sizes(Face, 0, 32);
 
 	unsigned char* atlas;
@@ -72,9 +72,9 @@ void Font::GenerateGlyph(char c, unsigned char* &atlas)
 
 	FT_UInt charIndex = FT_Get_Char_Index(Face, c);
 	error = FT_Load_Glyph(Face, charIndex, 0);
-	Assert_False(error, "Don't know.");
+	Assert(!error, "Don't know.");
 	error = FT_Render_Glyph(Face->glyph, FT_RENDER_MODE_NORMAL);
-	Assert_False(error, "Don't know.");
+	Assert(!error, "Don't know.");
 
 	_charOffsets[c].x = Face->glyph->advance.x >> 6;
 	_charOffsets[c].y = Face->glyph->bitmap_top;

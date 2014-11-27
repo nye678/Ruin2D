@@ -33,8 +33,7 @@ namespace Ruin2D
 		   Gets a shared pointer to the singleton object. */
 		inline static std::shared_ptr<T> Get()
 		{
-			Assert_True(Instance != nullptr,
-				"Tried to get a singleton instance that has not been created yet.");
+			Assert(Instance != nullptr, "Tried to get a singleton instance that has not been created yet.");
 			return Instance;
 		}
 

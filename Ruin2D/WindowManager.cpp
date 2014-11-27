@@ -115,8 +115,7 @@ void WindowManager::CreateNewWindow(int width, int height, const char* title)
 	if (!Created())
 	{
 		bool initialized = glfwInit() == 1;
-		Assert_True(initialized, "Failed to initialize the windowing library", 
-			CreateWindowErrorHandlerCallback);
+		Assert(initialized, "Failed to initialize the windowing library");
 
 		glfwWindowHint(GLFW_RED_BITS, 8);
 		glfwWindowHint(GLFW_GREEN_BITS, 8);
@@ -124,19 +123,12 @@ void WindowManager::CreateNewWindow(int width, int height, const char* title)
 		glfwWindowHint(GLFW_ALPHA_BITS, 8);
 
 		GLFWwindow* window = glfwCreateWindow(width, height, title, nullptr, nullptr);
-		Assert_NotNull(window, "Failed to create window.",
-			CreateWindowErrorHandlerCallback);
+		Assert(window, "Failed to create window.");
 
 		glfwMakeContextCurrent(window);
 
 		int result = gl3wInit();
-		Assert_True(result != -1, "Failed to initialize OpenGL");
-			//[window]() -> bool
-			//{
-			//	glfwDestroyWindow(window);
-			//	glfwTerminate();
-			//	return false;
-			//});
+		Assert(result != -1, "Failed to initialize OpenGL");
 
 		InputManager::Create();
 		glfwSetKeyCallback(window, KeyInputCallback);

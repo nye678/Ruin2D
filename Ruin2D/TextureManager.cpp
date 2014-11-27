@@ -50,12 +50,12 @@ TextureInfo TextureManager::LoadTexture(const string &filepath)
 {
 	FILE* fp;
 	errno_t error = fopen_s(&fp, filepath.c_str(), "rb");
-	Assert_NotNull(fp, "Failed to open image " + filepath);
+	Assert_NotNull(fp, ("Failed to open image " + filepath).c_str());
 
 	png_byte header[8];
 	fread_s(header, 8, sizeof(png_byte), 8, fp);
 	int isPng = png_sig_cmp(header, 0, 8);
-	Assert_True(isPng == 0, "The image is not a png.");
+	Assert(isPng == 0, "The image is not a png.");
 
 	png_structp png_ptr = png_create_read_struct(PNG_LIBPNG_VER_STRING, nullptr, nullptr, nullptr);
 	Assert_NotNull(png_ptr, "Failed to create the png read struct.");

@@ -35,6 +35,17 @@ namespace Ruin2D
 			glm::mat3 uv;
 		};
 
+		struct DrawCmd
+		{
+			GLuint texture;
+			GLint unit;
+			int count;
+
+			DrawCmd(GLuint texture, GLint unit, int count)
+				: texture(texture), unit(unit), count(count)
+			{}
+		};
+
 		struct DrawInfoCompare
 		{
 			inline bool operator() (const DrawInfo &lhs, const DrawInfo &rhs)

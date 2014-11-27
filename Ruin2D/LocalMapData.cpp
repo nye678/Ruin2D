@@ -9,7 +9,7 @@ LocalMapData* LocalMapData::LoadMapData(const string &filepath)
 	char* buffer;
 	size_t read = LoadTextFile(filepath.c_str(), buffer);
 
-	Assert_True(read > 0, "Failed to read any data from the provided file.");
+	Assert(read > 0, "Failed to read any data from the provided file.");
 
 	rapidjson::Document doc;
 	doc.Parse<0>(buffer);
