@@ -16,6 +16,15 @@ namespace Ruin2D
 	   composed in a 3x3 vector which is used as an input to the shader. */
 	class TileSet
 	{
+		struct TileProperties
+		{
+			bool blocking;
+			bool stair;
+			bool visible;
+
+			TileProperties() : blocking(false), stair(false), visible(true) {}
+		};
+
 	private:
 		int _tileWidth;
 		int _tileHeight;
@@ -23,7 +32,10 @@ namespace Ruin2D
 		int _columns;
 
 		std::string _name;
+
 		Texture _texture;
+
+		TileProperties* _properties;
 
 	public:
 		static TileSet Parse(const std::string &filepath, const rapidjson::Document &doc, int setIndex);
@@ -41,6 +53,8 @@ namespace Ruin2D
 		int Rows() const;
 
 		int Columns() const;
+
+		TileProperties GetTileProperties(int tileIndex) const;
 
 		glm::mat3 GetTileUVMatrix(int tileIndex) const;
 

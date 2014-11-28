@@ -40,6 +40,9 @@
     <Filter Include="Game\Data">
       <UniqueIdentifier>{9950e157-8575-4c2e-847e-1a4dcdf65071}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Engine\Physics">
+      <UniqueIdentifier>{a738b83e-d744-477f-893b-70a60bf26854}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Assert.h">

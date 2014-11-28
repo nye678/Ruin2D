@@ -1,7 +1,6 @@
 #include "TileMap.h"
 
 using namespace std;
-//using namespace glm;
 using namespace rapidjson;
 using namespace Ruin2D;
 
@@ -56,6 +55,33 @@ glm::ivec2 TileMap::WorldToGrid(double x, double y)
 	return glm::ivec2((float)x / _tilewidth, (float)y / _tileheight);
 }
 
+short TileMap::GetTile(int row, int col, int layer)
+{
+	return _layers[layer].tiles[GetIndex(row, col)];
+}
+
+bool TileMap::IsBlockingTile(int row, int col, int layer)
+{
+	//if (layer >= 0 && layer < _numlayers)
+	//{
+	//	Tile* tile = &_layers[layer - 1].tiles[GetIndex(row, col)];
+	//	return tile->blocking;
+	//}
+
+	return false;
+}
+
+bool TileMap::IsStairTile(int row, int col, int layer)
+{
+	//if (layer >= 0 && layer < _numlayers)
+	//{
+	//	Tile* tile = &_layers[layer - 1].tiles[GetIndex(row, col)];
+	//	return tile->stair;
+	//}
+
+	return false;
+}
+
 void TileMap::DrawForegroundLayers(const TileSet &tileSet, const glm::ivec4 &rect)
 {
 
@@ -75,7 +101,7 @@ void TileMap::DrawMapSection(const TileSet &tileSet, const glm::ivec4 &rect, int
 	if (layerIndex < _numlayers)
 	{
 		MapLayer* layer = &_layers[layerIndex];
-		if (!layer->regionLayer && layer->visible)
+		if (layer->visible)
 		{
 			for (int row = firstRow; row < lastRow; ++row)
 			{
@@ -87,8 +113,18 @@ void TileMap::DrawMapSection(const TileSet &tileSet, const glm::ivec4 &rect, int
 						int tileIndex = layer->tiles[index];
 						if (tileIndex >= 0)
 						{
-							auto position = GridToWorld(row, col);
-							graphics->DrawTile(tileSet, tileIndex, position, layerIndex);
+							auto tileProperties = tileSet.GetTileProperties(tileIndex);
+							if (tileProperties.visible)
+							{
+								auto position = GridToWorld(row, col);
+								graphics->DrawTile(tileSet, tileIndex, position, layerIndex);
+							}
+
+							/*if (tileProperties.blocking)
+							{
+								auto position = GridToWorld(row, col);
+								graphics->DrawTile(tileSet, 992, position, 100);
+							}*/
 						}
 					}
 				}
@@ -114,21 +150,10 @@ TileMap TileMap::Parse(const Document &doc)
 	tileMap._numlayers = layers.Size();
 	tileMap._layers = new MapLayer[tileMap._numlayers];
 
-	for (int layerIndex = 0; layerIndex < tileMap._numlayers; ++layerIndex)
+	for (int layerIndex = 0; layerIndex < layers.Size(); ++layerIndex)
 	{
 		MapLayer* layer = &tileMap._layers[layerIndex];
-
 		const Value &layerdoc = layers[layerIndex];
-		const Value &layerProperties = layerdoc["properties"];
-
-		if (!layerProperties.IsNull())
-		{
-			layer->regionLayer = layerProperties["regionLayer"].GetString() == "true";
-		}
-		else
-		{
-			layer->regionLayer = false;
-		}
 
 		layer->width = layerdoc["width"].GetInt();
 		layer->height = layerdoc["height"].GetInt();

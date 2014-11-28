@@ -15,6 +15,11 @@ LocalMapData* LocalMapData::LoadMapData(const string &filepath)
 	doc.Parse<0>(buffer);
 	delete buffer;
 
+	if (doc.HasParseError())
+	{
+		Assert_Fail("Failed to parse json document.");
+	}
+
 	LocalMapData* localmap = new LocalMapData();
 	localmap->tileMap = TileMap::Parse(doc);
 	localmap->tileSet = TileSet::Parse(filepath, doc, 0);

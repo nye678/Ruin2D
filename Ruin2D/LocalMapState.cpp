@@ -92,8 +92,37 @@ void LocalMapState::Update(double deltaTime)
 	}
 
 	//camera->Move(moveVec);
-	AllData::PlayerPos += moveVec;
-	camera->SetCenterPosition(AllData::PlayerPos);
+	auto pos = AllData::PlayerPos + moveVec;
+	auto gridLoc = _data->tileMap.WorldToGrid(pos.x, pos.y);
+	auto tileIndex = _data->tileMap.GetTile(gridLoc.y, gridLoc.x, AllData::PlayerLayer-1);
+	auto tileProps = _data->tileSet.GetTileProperties(tileIndex);
+
+	if (!tileProps.blocking)
+	{
+		AllData::PlayerPos += moveVec;
+		camera->SetCenterPosition(AllData::PlayerPos);
+
+		/*bool isStairsTile = _data->tileMap.IsStairTile(gridLoc.y, gridLoc.x, AllData::PlayerLayer);
+		if (isStairsTile && !AllData::PlayerOnStairs)
+		{
+			AllData::PlayerOnStairs = true;
+			AllData::PlayerLayer += 1;
+		}
+
+		bool lowerStairs = _data->tileMap.IsStairTile(gridLoc.y, gridLoc.x, AllData::PlayerLayer - 1);
+		if (lowerStairs && !AllData::PlayerOnStairs)
+		{
+			AllData::PlayerOnStairs = true;
+			AllData::PlayerLayer -= 1;
+		}
+
+		if (!isStairsTile && !lowerStairs && AllData::PlayerOnStairs)
+		{
+			AllData::PlayerOnStairs = false;
+		}*/
+
+		
+	}
 }
 
 void LocalMapState::Render()

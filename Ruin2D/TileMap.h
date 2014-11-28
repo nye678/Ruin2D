@@ -15,6 +15,8 @@ namespace Ruin2D
 {
 	class TileMap
 	{
+		
+
 		struct MapLayer
 		{
 			short* tiles;
@@ -25,7 +27,6 @@ namespace Ruin2D
 			int y;
 
 			bool visible;
-			bool regionLayer;
 			std::string name;
 		};
 
@@ -42,8 +43,6 @@ namespace Ruin2D
 
 		std::string _name;
 
-		int GetIndex(int row, int col);
-
 		int GetRow(int index);
 
 		int GetColumn(int index);
@@ -54,6 +53,14 @@ namespace Ruin2D
 		glm::vec2 GridToWorld(int row, int col);
 
 		glm::ivec2 WorldToGrid(double x, double y);
+
+		bool IsBlockingTile(int row, int col, int layer);
+
+		bool IsStairTile(int row, int col, int layer);
+
+		int GetIndex(int row, int col);
+
+		short GetTile(int row, int col, int layer);
 
 		static TileMap Parse(const rapidjson::Document &doc);
 
