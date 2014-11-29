@@ -1,4 +1,5 @@
 #include "Font.h"
+#include "Assert.h"
 
 using namespace std;
 using namespace glm;

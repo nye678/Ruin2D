@@ -7,10 +7,12 @@
 
 #include <GL3\gl3w.h>
 #include <glm\glm.hpp>
-#include "Assert.h"
 
 namespace Ruin2D
 {
+	/* Font Class */
+	/* Represents a font resource. Fonts are loaded using freetype and a
+	   texture atlas is created and loaded into gpu memory. */
 	class Font
 	{
 	private:
@@ -24,15 +26,25 @@ namespace Ruin2D
 		GLuint _fontTexture;
 		glm::vec2 _charOffsets[128];
 
-		static void InitializeFreeType();
-		void ConstructFontTexture(const std::string &filepath);
-		void GenerateGlyph(char c, unsigned char* &atlas);
 	public:
+		/* Loads a font from a font file. */
 		static Font Load(const std::string &filepath);
 
+		/* Gets the atlas offset for a character. */
 		glm::vec2 GetCharacterOffset(char c) const;
 
+		/* Draws a string at a given location on the screen. */
 		void DrawString(const std::string &str, const glm::vec2 &position);
+
+	private:
+		/* Initializes the freetype library. */
+		static void InitializeFreeType();
+
+		/* Creates the font texture atlas that is loaded on the gpu. */
+		void ConstructFontTexture(const std::string &filepath);
+
+		/* Generates a glyph using freetype and copies it to the atlas. */
+		void GenerateGlyph(char c, unsigned char* &atlas);
 	};
 }
 

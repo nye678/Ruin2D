@@ -25,16 +25,6 @@ namespace Ruin2D
 		Pause,
 	};
 
-	struct GameStateUpdateResult
-	{
-
-	};
-
-	struct GameStateRenderResults
-	{
-
-	};
-
 	class GameState
 	{
 	private:

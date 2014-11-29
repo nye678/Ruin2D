@@ -70,7 +70,6 @@
     <ClInclude Include="AllGameData.h" />
     <ClInclude Include="Assert.h" />
     <ClInclude Include="Camera.h" />
-    <ClInclude Include="EntityData.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Graphics.h" />
@@ -80,7 +79,6 @@
     <ClInclude Include="LocalMapState.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="BootState.h" />
-    <ClInclude Include="PlayerData.h" />
     <ClInclude Include="Sprite.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
@@ -93,7 +91,6 @@
     <ClCompile Include="AllGameData.cpp" />
     <ClCompile Include="BootState.cpp" />
     <ClCompile Include="Camera.cpp" />
-    <ClCompile Include="EntityData.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputManager.cpp" />

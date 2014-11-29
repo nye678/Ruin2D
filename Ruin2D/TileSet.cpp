@@ -1,4 +1,5 @@
 #include "TileSet.h"
+#include "Utility.h"
 
 using namespace std;
 using namespace Ruin2D;

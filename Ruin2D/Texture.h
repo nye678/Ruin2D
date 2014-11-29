@@ -5,12 +5,11 @@
 #include <GL3\gl3w.h>
 #include <libpng\png.h>
 #include "TextureManager.h"
-#include "Assert.h"
 
 namespace Ruin2D
 {
-	/* Texture
-	   Simple texture class that loads an image into the gpu memory. 
+	/* Texture Class */
+	/* Simple texture class that loads an image into the gpu memory. 
 	   Only png files are currently supported. */
 	class Texture
 	{

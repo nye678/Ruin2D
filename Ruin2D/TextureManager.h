@@ -1,14 +1,12 @@
 #ifndef __RUIN2D_TEXTUREMANAGER_H_
 #define __RUIN2D_TEXTUREMANAGER_H_
 
-#include <memory>
 #include <string>
 #include <GL3\gl3w.h>
-#include <libpng\png.h>
-#include "Assert.h"
 
 namespace Ruin2D
 {
+	// Basic info for a texture.
 	struct TextureInfo
 	{
 		int width, height;
@@ -17,6 +15,9 @@ namespace Ruin2D
 		GLint unit;
 	};
 
+	/* TextureManager Class */
+	/* Manager class for textures. Each texture is loaded directed into
+	   gpu memory. */
 	class TextureManager
 	{	
 	private:
@@ -28,15 +29,17 @@ namespace Ruin2D
 		int _numTextures;
 
 	public:
+		/* Loads a texture into gpu memory. */
 		TextureInfo LoadTexture(const std::string &filepath);
 
+	private:
+		/* Creates a new texture in gpu memory. */
+		void CreateTexture(unsigned char* data, TextureInfo &info);
 
+	public:
 		TextureManager();
 		TextureManager(const TextureManager &) = delete;
 		TextureManager &operator= (const TextureManager &) = delete;
-	private:
-		void CreateTexture(unsigned char* data, TextureInfo &info);
-
 	};
 }
 

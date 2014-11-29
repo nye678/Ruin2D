@@ -1,4 +1,5 @@
 #include "TileMap.h"
+#include "Utility.h"
 
 using namespace std;
 using namespace rapidjson;
@@ -60,28 +61,6 @@ short TileMap::GetTile(int row, int col, int layer)
 	return _layers[layer].tiles[GetIndex(row, col)];
 }
 
-bool TileMap::IsBlockingTile(int row, int col, int layer)
-{
-	//if (layer >= 0 && layer < _numlayers)
-	//{
-	//	Tile* tile = &_layers[layer - 1].tiles[GetIndex(row, col)];
-	//	return tile->blocking;
-	//}
-
-	return false;
-}
-
-bool TileMap::IsStairTile(int row, int col, int layer)
-{
-	//if (layer >= 0 && layer < _numlayers)
-	//{
-	//	Tile* tile = &_layers[layer - 1].tiles[GetIndex(row, col)];
-	//	return tile->stair;
-	//}
-
-	return false;
-}
-
 void TileMap::DrawForegroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect)
 {
 
@@ -92,10 +71,10 @@ void TileMap::DrawMapSection(Graphics* graphics, const TileSet &tileSet, const g
 	auto topleft = WorldToGrid(-rect.x, rect.y);
 	auto bottomright = WorldToGrid(rect.z, rect.w);
 
-	int firstRow = max(topleft.y , 0);
-	int firstCol = max(topleft.x, 0);
-	int lastRow = min(bottomright.y + topleft.y + 1, _height);
-	int lastCol = min(bottomright.x + topleft.x + 1, _width);
+	int firstRow = glm::max(topleft.y , 0);
+	int firstCol = glm::max(topleft.x, 0);
+	int lastRow = glm::min(bottomright.y + topleft.y + 1, _height);
+	int lastCol = glm::min(bottomright.x + topleft.x + 1, _width);
 
 	if (layerIndex < _numlayers)
 	{

@@ -1,135 +1,15 @@
 #include "Graphics.h"
 
+#include <algorithm>
+#include <vector>
+#include <glm\gtc\constants.hpp>
+#include <glm\gtc\matrix_transform.hpp>
+#include <glm\gtc\type_ptr.hpp>
+#include "Log.h"
+
 using namespace std;
 using namespace glm;
 using namespace Ruin2D;
-
-const char* vertShaderCode = R"glsl(
-#version 430
-
-layout (location = 5) in mat4 transform;
-layout (location = 10) in mat3 uvMat;
-
-uniform mat4 camera;
-
-out vec2 uv;
-
-void main()
-{
-	const vec4 vertices[4] = vec4[4](vec4(0.0, 0.0, 0.0, 1.0),
-									 vec4(1.0, 0.0, 0.0, 1.0),
-									 vec4(1.0, -1.0, 0.0, 1.0),
-									 vec4(0.0, -1.0, 0.0, 1.0));
-
-	gl_Position = camera * transform * vertices[gl_VertexID];
-
-	const vec3 uv_verts[4] = vec3[4](vec3(0.0, 0.0, 1.0),
-									 vec3(1.0, 0.0, 1.0),
-									 vec3(1.0, -1.0, 1.0),
-									 vec3(0.0, -1.0, 1.0));
-
-	uv = (uvMat * uv_verts[gl_VertexID]).xy;
-}
-)glsl";
-
-const char* fragShaderCode = R"glsl(
-#version 430
-
-in vec2 uv;
-
-out vec4 end_color;
-
-uniform sampler2D spriteTex;
-
-void main()
-{
-	vec4 texColor = texture(spriteTex, uv);
-	end_color = texColor;
-}
-)glsl";
-
-const char* textVertShaderCode = R"glsl(
-#version 430
-
-layout (location = 0) in vec2 pos;
-layout (location = 1) in vec2 vert_uv;
-
-uniform mat4 transform;
-uniform mat4 ortho;
-
-out vec2 uv;
-
-void main()
-{
-	gl_Position = ortho * transform * vec4(pos, 0.0, 1.0);
-	uv = vert_uv;
-}
-)glsl";
-
-const char* textFragShaderCode = R"glsl(
-#version 430
-
-in vec2 uv;
-
-uniform sampler2D tex;
-uniform vec4 color;
-
-out vec4 final_color;
-
-void main()
-{
-	final_color = vec4(vec3(1.0), texture2D(tex, vec2(uv.x, uv.y)).r) * color;
-}
-)glsl";
-
-const char* tileVertShaderCode = R"glsl(
-#version 430
-
-layout (location = 0) in vec2 position;
-layout (location = 1) in vec3 tex_coords;
-
-uniform mat4 transform;
-uniform mat4 camera;
-
-layout (binding = 2, std430) uniform TextureInfoBlock
-{
-	short width;
-	short height;
-	short tileWidth;
-	short tileHeight;
-	short rows
-	short cols
-} textureInfo[];
-
-out VS_OUT
-{
-	vec3 tex_coords;
-} vs_out;
-
-void main()
-{
-	gl_Position = camera * transform * vec4(position, 0.0, 1.0);
-	vs_out.tex_coords = tex_coords;
-}
-)glsl";
-
-const char* textFragBerhhShaderCode = R"glsl(
-#version 430
-
-in VS_OUT
-{
-	vec3 tex_coords;
-} vs_in;
-
-uniform sampler2DArray tex;
-
-out vec4 color;
-
-void main()
-{
-	color = texture(tex, vec3(vs_in.tex_coords));
-}
-)glsl";
 
 Graphics::Graphics()
 {
@@ -372,8 +252,19 @@ void Graphics::InitializeBuffers()
 {
 	glViewport(0, 0, 1024, 768);
 
+	char* vertShaderCode = nullptr;
+	char* fragShaderCode = nullptr;
+	size_t read = 0;
+	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\DefaultTileShader.vert", vertShaderCode);
+	Assert(read != 0, "Failed to read the vert shader file");
+	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\DefaultTileShader.frag", fragShaderCode);
+	Assert(read != 0, "Failed to read the frag shader file");
+
 	shader = CreateBasicShader(vertShaderCode, fragShaderCode);
 	glUseProgram(shader);
+
+	delete[] vertShaderCode;
+	delete[] fragShaderCode;
 
 	transformLoc = GetShaderLocation(shader, "transform");
 	uvLoc = GetShaderLocation(shader, "uvMat");
@@ -411,7 +302,17 @@ void Graphics::InitializeBuffers()
 	glEnable(GL_BLEND);
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
+	char* textVertShaderCode = nullptr;
+	char* textFragShaderCode = nullptr;
+	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\DefaultTextShader.vert", textVertShaderCode);
+	Assert(read != 0, "Failed to read the text vert shader file");
+	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\DefaultTextShader.frag", textFragShaderCode);
+	Assert(read != 0, "Failed to read the text frag shader file");
+
 	textShader = CreateBasicShader(textVertShaderCode, textFragShaderCode);
+
+	delete[] textVertShaderCode;
+	delete[] textFragShaderCode;
 
 	glUseProgram(textShader);
 

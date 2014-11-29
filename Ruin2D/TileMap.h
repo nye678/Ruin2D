@@ -2,21 +2,20 @@
 #define __RUIN2D_TILEMAP_H_
 
 #include <string>
-#include <vector>
 #include <glm\glm.hpp>
-#include <cmath>
-
 #include <rapidjson\document.h>
 #include "TileSet.h"
-#include "Utility.h"
+
 #include "Graphics.h"
 
 namespace Ruin2D
 {
+	/* TileMap Class */
+	/* A tile map is a regular grid map with 1 or more layers decorated by
+	   a tile set. */
 	class TileMap
 	{
-		
-
+		// A layer in a tile map. 
 		struct MapLayer
 		{
 			short* tiles;
@@ -43,35 +42,46 @@ namespace Ruin2D
 
 		std::string _name;
 
+	public:
+		// Converts a grid position into world coordinates. Will be the
+		// upper left corner of the grid.
+		glm::vec2 GridToWorld(int row, int col);
+
+		// Converts world coordinates to grid coordinates.
+		glm::ivec2 WorldToGrid(double x, double y);
+
+		// Gets the grid index using the given grid coordinates.
+		int GetIndex(int row, int col);
+
+		// Gets the tile index used in the tile map at the given grid coordinates and layer.
+		short GetTile(int row, int col, int layer);
+
+		// Parses tile map data from a json document.
+		static TileMap Parse(const rapidjson::Document &doc);
+
+		// Returns the name of the tile map.
+		std::string Name() const;
+
+		// Draws the background layers of the tile map.
+		void DrawBackgroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect);
+
+		// Draws the foreground layers of the tile map.
+		void DrawForegroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect);
+
+		// Draws a section of a tile map layer.
+		void DrawMapSection(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect, int layer);
+
+	private:
+		// Gets the grid row from a grid index.
 		int GetRow(int index);
 
+		// Gets the column from a grid index.
 		int GetColumn(int index);
 
+		// Converts a point to grid coordinates.
 		glm::ivec2 PointToGridCoords(int x, int y);
 
 	public:
-		glm::vec2 GridToWorld(int row, int col);
-
-		glm::ivec2 WorldToGrid(double x, double y);
-
-		bool IsBlockingTile(int row, int col, int layer);
-
-		bool IsStairTile(int row, int col, int layer);
-
-		int GetIndex(int row, int col);
-
-		short GetTile(int row, int col, int layer);
-
-		static TileMap Parse(const rapidjson::Document &doc);
-
-		std::string Name() const;
-
-		void DrawBackgroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect);
-
-		void DrawForegroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect);
-
-		void DrawMapSection(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect, int layer);
-
 		TileMap();
 	};
 }

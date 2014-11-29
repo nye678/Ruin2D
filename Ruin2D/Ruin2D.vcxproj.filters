@@ -25,14 +25,8 @@
     <Filter Include="Engine\Data">
       <UniqueIdentifier>{508c702d-ba7f-4dcb-bf2a-7850b0c0ae59}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Data\Maps">
-      <UniqueIdentifier>{8e45a87b-76fa-45dd-959b-5d658c0c0512}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\Data\Characters">
       <UniqueIdentifier>{7ca7f81a-265d-4b2d-93f5-2420a5c0628f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Data\Player">
-      <UniqueIdentifier>{54b42e82-7800-49b7-9b9d-3ae45345b26f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{641586bc-fec1-4e46-83cc-cf36d73db7f2}</UniqueIdentifier>
@@ -66,9 +60,6 @@
     <ClInclude Include="GameStateMachine.h">
       <Filter>Engine\States</Filter>
     </ClInclude>
-    <ClInclude Include="EntityData.h">
-      <Filter>Engine\Data\Characters</Filter>
-    </ClInclude>
     <ClInclude Include="Texture.h">
       <Filter>Engine\Resources</Filter>
     </ClInclude>
@@ -86,9 +77,6 @@
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Engine</Filter>
-    </ClInclude>
-    <ClInclude Include="PlayerData.h">
-      <Filter>Engine\Data\Player</Filter>
     </ClInclude>
     <ClInclude Include="AllGameData.h">
       <Filter>Game</Filter>
@@ -128,9 +116,6 @@
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Engine\States</Filter>
-    </ClCompile>
-    <ClCompile Include="EntityData.cpp">
-      <Filter>Engine\Data\Characters</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
       <Filter>Engine\Resources</Filter>
