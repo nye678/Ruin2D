@@ -34,9 +34,8 @@ void Sprite::SetDirection(int dir)
 	_direction = dir;
 }
 
-void Sprite::DrawSprite(const glm::vec2 &position, short layer)
+void Sprite::DrawSprite(Graphics* graphics, const glm::vec2 &position, short layer)
 {
-	auto graphics = Graphics::Get();
 	auto spriteDrawPos = position;
 	spriteDrawPos.y -= _tileSet.TileHeight();
 	spriteDrawPos.x -= _tileSet.TileWidth() / 2.0f;

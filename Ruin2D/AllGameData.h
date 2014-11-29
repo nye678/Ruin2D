@@ -15,6 +15,7 @@ namespace Ruin2DGame
 		static glm::vec2 PlayerPos;
 		static short PlayerLayer;
 		static bool PlayerOnStairs;
+		static Ruin2D::Camera* MainCamera;
 
 		static void LoadAllData();
 	};

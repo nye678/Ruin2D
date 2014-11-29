@@ -4,10 +4,14 @@
 #include <vector>
 
 #include "Log.h"
-#include "Singleton.h"
 
 namespace Ruin2D
 {
+	// Forwards Declarations
+	class Graphics;
+	class GameStateMachine;
+	class InputManager;
+
 	enum StateType
 	{
 		Null,
@@ -36,50 +40,42 @@ namespace Ruin2D
 	private:
 		StateType _type;
 
-	public:
-		virtual void Update(double deltaTime) {};
+	protected:
+		GameStateMachine* _parent;
 
-		virtual void Render() {};
+	public:
+		virtual void Update(InputManager* input, double deltaTime) {};
+
+		virtual void Render(Graphics* graphics) {};
 
 		StateType Type() { return _type; }
 
-		GameState(StateType type) : _type(type) {};
+		GameState(GameStateMachine* parent, StateType type) 
+			: _parent(parent), _type(type) {};
 	};
 
 	class GameStateMachine
 	{
-		friend class Singleton<GameStateMachine>;
-
 	private:
-		static Singleton<GameStateMachine> Singleton;
-
 		std::vector<GameState*> _stack;
 		GameState* _next;
 		bool _pop;
 
 		StateType _current;
 	public:
-		static std::shared_ptr<GameStateMachine> Create();
-
-		inline static std::shared_ptr<GameStateMachine> Get()
-		{
-			return Singleton.Get();
-		}
-
 		void PushState(GameState* state);
 
 		void PopState();
 
-		void Update(double deltaTime);
+		void Update(InputManager* input, double deltaTime);
 
-		void Render();
+		void Render(Graphics* graphics);
 
 		StateType Current();
-	private:
+
 		GameStateMachine();
 		GameStateMachine(const GameStateMachine &) = delete;
 		GameStateMachine &operator= (const GameStateMachine &) = delete;
-	public:
 		~GameStateMachine();
 	};
 }

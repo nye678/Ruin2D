@@ -66,11 +66,11 @@ namespace Ruin2D
 
 		std::string Name() const;
 
-		void DrawBackgroundLayers(const TileSet &tileSet, const glm::ivec4 &rect);
+		void DrawBackgroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect);
 
-		void DrawForegroundLayers(const TileSet &tileSet, const glm::ivec4 &rect);
+		void DrawForegroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect);
 
-		void DrawMapSection(const TileSet &tileSet, const glm::ivec4 &rect, int layer);
+		void DrawMapSection(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect, int layer);
 
 		TileMap();
 	};

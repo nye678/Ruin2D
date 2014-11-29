@@ -13,12 +13,6 @@ GameStateMachine::~GameStateMachine()
 	_next = nullptr;
 }
 
-shared_ptr<GameStateMachine> GameStateMachine::Create()
-{
-	Log::Info("Creating singleton instance for the Game State Machine.");
-	return Singleton.Create();
-}
-
 void GameStateMachine::PushState(GameState* state)
 {
 	_next = state;
@@ -29,7 +23,7 @@ void GameStateMachine::PopState()
 	_pop = true;
 }
 
-void GameStateMachine::Update(double deltaTime)
+void GameStateMachine::Update(InputManager* input, double deltaTime)
 {
 	if (_pop)
 	{
@@ -58,15 +52,15 @@ void GameStateMachine::Update(double deltaTime)
 
 	if (_stack.size() > 0)
 	{
-		_stack.back()->Update(deltaTime);
+		_stack.back()->Update(input, deltaTime);
 	}
 }
 
-void GameStateMachine::Render()
+void GameStateMachine::Render(Graphics* graphics)
 {
 	if (_stack.size() > 0)
 	{
-		_stack.back()->Render();
+		_stack.back()->Render(graphics);
 	}
 }
 

@@ -7,14 +7,9 @@ using namespace Ruin2D;
 Camera::Camera()
 	: _position(vec2(0.0f, 0.0f)), _dirty(true), _zoom(2.0f)
 {
-	auto windowSize = WindowManager::Get()->GetSize();
-	_proj = ortho(0.0f, (float)windowSize.x, (float)-windowSize.y, 0.0f);
+	// Hack window size
+	_proj = ortho(0.0f, (float)1024, (float)-768, 0.0f);
 	_camera = mat4(1.0);
-}
-
-shared_ptr<Camera> Camera::Create()
-{
-	return Singleton.Create();
 }
 
 vec2 Camera::Position() const
@@ -30,11 +25,11 @@ void Camera::SetPosition(const vec2 &position)
 
 void Camera::SetCenterPosition(const glm::vec2 &position)
 {
-	auto windowSize = WindowManager::Get()->GetSize();
 	_position.x = -position.x;
 	_position.y = position.y;
-	_position.x += windowSize.x / (2.0f * _zoom);
-	_position.y -= windowSize.y / (2.0f * _zoom);
+	// Hack window size
+	_position.x += 1024.0f / (2.0f * _zoom);
+	_position.y -= 768.0f / (2.0f * _zoom);
 	_dirty = true;
 
 }

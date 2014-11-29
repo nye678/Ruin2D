@@ -4,15 +4,11 @@ using namespace std;
 using namespace glm;
 using namespace Ruin2D;
 
+InputManager* WindowManager::Input = nullptr;
+
 WindowManager::WindowManager()
 	: _window(nullptr)
 {}
-
-std::shared_ptr<WindowManager> WindowManager::Create()
-{
-	Log::Info("Creating singleton instance for the Window Manager.");
-	return Singleton.Create();
-}
 
 ivec2 WindowManager::GetDesktopSize()
 {
@@ -94,6 +90,11 @@ void WindowManager::SetDisplayMode(int width, int height)
 	glfwSetWindowSize(_window, width, height);
 }
 
+void WindowManager::SetInputCallback(InputManager* input)
+{
+	Input = input;
+}
+
 void WindowManager::SwapBuffer()
 {
 	glfwSwapBuffers(_window);
@@ -130,7 +131,6 @@ void WindowManager::CreateNewWindow(int width, int height, const char* title)
 		int result = gl3wInit();
 		Assert(result != -1, "Failed to initialize OpenGL");
 
-		InputManager::Create();
 		glfwSetKeyCallback(window, KeyInputCallback);
 
 		_window = window;
@@ -150,5 +150,8 @@ void WindowManager::DestroyWindow()
 
 void WindowManager::KeyInputCallback(GLFWwindow* window, int key, int scancode, int action, int mods)
 {
-	InputManager::Get()->PushInputEvent(key, scancode, action, mods);
+	if (Input)
+	{
+		Input->PushInputEvent(key, scancode, action, mods);
+	}
 }

@@ -15,10 +15,14 @@ namespace Ruin2D
 	class Texture
 	{
 	private:
+		static TextureManager* Manager;
+
 		std::string _filepath;
 		TextureInfo _info;
 
 	public:
+		static void SetManager(TextureManager* manager);
+
 		/* Load
 		   Loads the texture into the gpu memory. */
 		static Texture Load(const std::string &filepath);

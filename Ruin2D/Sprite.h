@@ -24,7 +24,7 @@ namespace Ruin2D
 
 		void SetDirection(int dir);
 
-		void DrawSprite(const glm::vec2 &position, short layer);
+		void DrawSprite(Graphics* graphics, const glm::vec2 &position, short layer);
 
 		Sprite();
 	};

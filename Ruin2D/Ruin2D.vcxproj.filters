@@ -48,17 +48,11 @@
     <ClInclude Include="Assert.h">
       <Filter>Engine\Utility</Filter>
     </ClInclude>
-    <ClInclude Include="Engine.h">
-      <Filter>Engine</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="WindowManager.h">
       <Filter>Engine\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>Engine\Utility</Filter>
     </ClInclude>
     <ClInclude Include="Log.h">
       <Filter>Engine\Utility</Filter>
@@ -93,9 +87,6 @@
     <ClInclude Include="Camera.h">
       <Filter>Engine</Filter>
     </ClInclude>
-    <ClInclude Include="TileRenderer.h">
-      <Filter>Engine\Graphics</Filter>
-    </ClInclude>
     <ClInclude Include="PlayerData.h">
       <Filter>Engine\Data\Player</Filter>
     </ClInclude>
@@ -120,9 +111,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Engine.cpp">
-      <Filter>Engine</Filter>
-    </ClCompile>
     <ClCompile Include="Graphics.cpp">
       <Filter>Engine\Graphics</Filter>
     </ClCompile>

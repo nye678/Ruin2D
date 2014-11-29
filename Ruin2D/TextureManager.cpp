@@ -24,11 +24,6 @@ TextureManager::TextureManager()
 	}
 }
 
-shared_ptr<TextureManager> TextureManager::Create()
-{
-	return Singleton.Create();
-}
-
 void TextureManager::CreateTexture(unsigned char* data, TextureInfo &info)
 {
 	glGenTextures(1, &info.handle);

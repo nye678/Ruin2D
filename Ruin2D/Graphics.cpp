@@ -136,14 +136,6 @@ Graphics::Graphics()
 	auto version = glGetString(GL_VERSION);
 
 	InitializeBuffers();
-	Camera::Create();
-	TextureManager::Create();
-}
-
-shared_ptr<Graphics> Graphics::Create()
-{
-	Log::Info("Creating singleton instance for Graphics.");
-	return Singleton.Create();
 }
 
 void Graphics::SetClearColor(float r, float g, float b)
@@ -167,6 +159,11 @@ void Graphics::EndBatch()
 	}
 
 	//RenderText();
+}
+
+void Graphics::UpdateCamera(Camera* camera)
+{
+	camera->UpdateCameraView(cameraLoc);
 }
 
 void Graphics::Draw(const Texture &texture, const glm::vec2 &position, double orientation, short layer, const glm::vec2 &scale, const glm::vec2 &origin)
@@ -293,8 +290,6 @@ void Graphics::Render()
 	glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
 	glUnmapBuffer(GL_ARRAY_BUFFER);
 	uvs = nullptr;
-
-	Camera::Get()->UpdateCameraView(cameraLoc);
 
 	int baseInstance = 0;
 	Assert(textureBuckets.size() < 100, "Exceeded command buffer size.");

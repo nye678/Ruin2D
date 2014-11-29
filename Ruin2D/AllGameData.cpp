@@ -8,9 +8,12 @@ Sprite			AllData::PlayerSprite;
 glm::vec2		AllData::PlayerPos;
 short			AllData::PlayerLayer;
 bool			AllData::PlayerOnStairs;
+Camera*			AllData::MainCamera = nullptr;
 
 void AllData::LoadAllData()
 {
+	MainCamera = new Camera();
+
 	// Load maps.
 	TestMap = LocalMapData::LoadMapData("D:\\Projects\\Ruin2D\\Data\\Maps\\testmap.json");
 

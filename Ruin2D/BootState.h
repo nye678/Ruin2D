@@ -10,11 +10,11 @@ namespace Ruin2DGame
 	class BootState : public Ruin2D::GameState
 	{
 	public:
-		virtual void Update(double deltaTime);
+		virtual void Update(Ruin2D::InputManager* input, double deltaTime);
 
-		virtual void Render();
+		virtual void Render(Ruin2D::Graphics* graphics);
 
-		BootState();
+		BootState(Ruin2D::GameStateMachine* parent);
 	};
 }
 

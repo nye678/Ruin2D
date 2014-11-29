@@ -6,11 +6,6 @@ using namespace Ruin2D;
 InputManager::InputManager()
 {}
 
-shared_ptr<InputManager> InputManager::Create()
-{
-	return Singleton.Create();
-}
-
 void InputManager::PushInputEvent(int key, int scancode, int action, int mods)
 {
 	auto inputEvent = KeyboardInput();

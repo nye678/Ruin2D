@@ -4,18 +4,13 @@
 #include <glm\glm.hpp>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
-#include "Singleton.h"
 #include "WindowManager.h"
 
 namespace Ruin2D
 {
 	class Camera
 	{
-		friend class Singleton<Camera>;
-
 	private:
-		static Singleton<Camera> Singleton;
-
 		bool _dirty;
 		glm::vec2 _position;
 		float _zoom;
@@ -23,13 +18,6 @@ namespace Ruin2D
 		glm::mat4 _proj;
 
 	public:
-		static std::shared_ptr<Camera> Create();
-
-		inline static std::shared_ptr<Camera> Get()
-		{
-			return Singleton.Get();
-		}
-
 		glm::vec2 Position() const;
 
 		void SetPosition(const glm::vec2 &);
@@ -44,7 +32,6 @@ namespace Ruin2D
 
 		glm::ivec4 GetViewRectangle() const;
 
-	private:
 		Camera();
 		Camera(const Camera &) = delete;
 		Camera &operator= (const Camera &) = delete;

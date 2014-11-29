@@ -28,11 +28,11 @@ int TileMap::GetColumn(int index)
 	return index % _width;
 }
 
-void TileMap::DrawBackgroundLayers(const TileSet &tileSet, const glm::ivec4 &rect)
+void TileMap::DrawBackgroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect)
 {
 	for (int i = 0; i < _numlayers; ++i)
 	{
-		DrawMapSection(tileSet, rect, i);
+		DrawMapSection(graphics, tileSet, rect, i);
 	}
 }
 
@@ -82,14 +82,13 @@ bool TileMap::IsStairTile(int row, int col, int layer)
 	return false;
 }
 
-void TileMap::DrawForegroundLayers(const TileSet &tileSet, const glm::ivec4 &rect)
+void TileMap::DrawForegroundLayers(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect)
 {
 
 }
 
-void TileMap::DrawMapSection(const TileSet &tileSet, const glm::ivec4 &rect, int layerIndex)
+void TileMap::DrawMapSection(Graphics* graphics, const TileSet &tileSet, const glm::ivec4 &rect, int layerIndex)
 {
-	auto graphics = Graphics::Get();
 	auto topleft = WorldToGrid(-rect.x, rect.y);
 	auto bottomright = WorldToGrid(rect.z, rect.w);
 
@@ -150,7 +149,7 @@ TileMap TileMap::Parse(const Document &doc)
 	tileMap._numlayers = layers.Size();
 	tileMap._layers = new MapLayer[tileMap._numlayers];
 
-	for (int layerIndex = 0; layerIndex < layers.Size(); ++layerIndex)
+	for (unsigned int layerIndex = 0; layerIndex < layers.Size(); ++layerIndex)
 	{
 		MapLayer* layer = &tileMap._layers[layerIndex];
 		const Value &layerdoc = layers[layerIndex];
@@ -165,7 +164,7 @@ TileMap TileMap::Parse(const Document &doc)
 		const Value &data = layerdoc["data"];
 		layer->tiles = new short[layer->width * layer->height];
 
-		for (int dataIndex = 0; dataIndex < data.Size(); ++dataIndex)
+		for (unsigned int dataIndex = 0; dataIndex < data.Size(); ++dataIndex)
 		{
 			short tile = (short)(data[dataIndex].GetInt() - 1);
 			layer->tiles[dataIndex] = (short)(tile);

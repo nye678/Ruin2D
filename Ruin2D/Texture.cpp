@@ -3,6 +3,8 @@
 using namespace std;
 using namespace Ruin2D;
 
+TextureManager* Texture::Manager = nullptr;
+
 GLuint Texture::Handle() const
 {
 	return _info.handle;
@@ -28,13 +30,19 @@ const string &Texture::Filepath() const
 	return _filepath;
 }
 
+void Texture::SetManager(TextureManager* manager)
+{
+	Manager = manager;
+}
+
 Texture Texture::Load(const std::string &filepath)
 {
-	auto textureManager = TextureManager::Get();
 	auto texture = Texture();
 
 	texture._filepath = filepath;
-	texture._info = textureManager->LoadTexture(filepath);
+
+	Assert_NotNull(Manager, "No texture manager has been set for the texture class.");
+	texture._info = Manager->LoadTexture(filepath);
 
 	return texture;
 }

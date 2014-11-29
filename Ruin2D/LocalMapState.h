@@ -16,11 +16,11 @@ namespace Ruin2DGame
 		LocalMapData* _data;
 
 	public:
-		virtual void Update(double deltaTime);
+		virtual void Update(Ruin2D::InputManager* input, double deltaTime);
 
-		virtual void Render();
+		virtual void Render(Ruin2D::Graphics* graphics);
 
-		LocalMapState(LocalMapData* data);
+		LocalMapState(Ruin2D::GameStateMachine* parent, LocalMapData* data);
 	};
 }
 

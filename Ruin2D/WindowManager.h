@@ -7,8 +7,6 @@
 #include "Assert.h"
 #include "InputManager.h"
 #include "Log.h"
-#include "Singleton.h"
-
 
 namespace Ruin2D 
 {
@@ -16,26 +14,11 @@ namespace Ruin2D
 	   The window manager is responsible for managing the game window. */
 	class WindowManager
 	{
-		friend class Singleton<WindowManager>;
-
 	private:
-		static Singleton<WindowManager> Singleton;
-		
+		static InputManager* Input;
+
 		GLFWwindow* _window;
-
 	public:
-		/* Create
-		   Creates the window manager's singleton instance. Call this before
-		   trying to use the window manager. */
-		static std::shared_ptr<WindowManager> Create();
-
-		/* Get
-		   Gets a shared pointer to the window manager singleton instance. */
-		inline static std::shared_ptr<WindowManager> Get()
-		{
-			return Singleton.Get();
-		}
-
 		/* Get Desktop Size
 		   Gets the current size the primary desktop. */
 		glm::ivec2 GetDesktopSize();
@@ -85,6 +68,10 @@ namespace Ruin2D
 		   Sets the display size of the window. Values should be in pixels. */
 		void SetDisplayMode(int width, int height);
 
+		/* Set Input Callback
+		   Sets the callback for the window input to be directed to the input manager. */
+		void SetInputCallback(InputManager* input);
+
 		/* Swap Buffer
 		   Swaps the windows back and front buffers. */
 		void SwapBuffer();
@@ -101,12 +88,11 @@ namespace Ruin2D
 		   Destroys the current window if one has been created. */
 		void DestroyWindow();
 
-	private:
-		static void KeyInputCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
-
 		WindowManager();
 		WindowManager(const WindowManager &) = delete;
 		WindowManager &operator= (const WindowManager &) = delete;
+	private:
+		static void KeyInputCallback(GLFWwindow* window, int key, int scancode, int action, int mods);
 	};
 }
 

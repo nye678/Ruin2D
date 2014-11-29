@@ -3,20 +3,19 @@
 using namespace Ruin2D;
 using namespace Ruin2DGame;
 
-BootState::BootState()
-	: GameState(StateType::Boot)
+BootState::BootState(GameStateMachine* parent)
+	: GameState(parent, StateType::Boot)
 {}
 
-void BootState::Update(double deltaTime)
+void BootState::Update(InputManager* input, double deltaTime)
 {
 	AllData::LoadAllData();
 
-	auto gsm = GameStateMachine::Get();
-	gsm->PopState();
-	gsm->PushState(new LocalMapState(AllData::TestMap));
+	_parent->PopState();
+	_parent->PushState(new LocalMapState(_parent, AllData::TestMap));
 }
 
-void BootState::Render()
+void BootState::Render(Graphics* graphics)
 {
 
 }

@@ -3,15 +3,14 @@
 using namespace Ruin2D;
 using namespace Ruin2DGame;
 
-LocalMapState::LocalMapState(LocalMapData* data)
-	: GameState(StateType::Local), _data(data)
+LocalMapState::LocalMapState(GameStateMachine* parent, LocalMapData* data)
+	: GameState(parent, StateType::Local), _data(data)
 {}
 
 bool up, down, left, right;
 
-void LocalMapState::Update(double deltaTime)
+void LocalMapState::Update(InputManager* input, double deltaTime)
 {
-	auto input = InputManager::Get();
 	auto events = input->GetEvents();
 
 	for (auto inputEvent : events)
@@ -59,7 +58,7 @@ void LocalMapState::Update(double deltaTime)
 		}
 	}
 
-	auto camera = Camera::Get();
+	auto camera = AllData::MainCamera;
 	auto moveVec = glm::vec2(0.0, 0.0);
 	double speed = 2.0;
 	if (up)
@@ -125,23 +124,22 @@ void LocalMapState::Update(double deltaTime)
 	}
 }
 
-void LocalMapState::Render()
+void LocalMapState::Render(Graphics* graphics)
 {
 	if (_data != nullptr)
 	{
-		auto camera = Camera::Get();
-		auto graphics = Graphics::Get();
+		auto cameraViewRect = AllData::MainCamera->GetViewRectangle();
 
-		auto cameraViewRect = camera->GetViewRectangle();
-
-		_data->tileMap.DrawBackgroundLayers(_data->tileSet, cameraViewRect);
+		_data->tileMap.DrawBackgroundLayers(graphics, _data->tileSet, cameraViewRect);
 
 		auto playerGridLoc = _data->tileMap.WorldToGrid(AllData::PlayerPos.x, AllData::PlayerPos.y);
 		auto playerWorldGrid = _data->tileMap.GridToWorld(playerGridLoc.y, playerGridLoc.x);
 
-		Graphics::Get()->DrawTile(_data->tileSet, 960, playerWorldGrid, 100);
-		AllData::PlayerSprite.DrawSprite(AllData::PlayerPos, AllData::PlayerLayer);
+		graphics->DrawTile(_data->tileSet, 960, playerWorldGrid, 100);
+		AllData::PlayerSprite.DrawSprite(graphics, AllData::PlayerPos, AllData::PlayerLayer);
 
-		_data->tileMap.DrawForegroundLayers(_data->tileSet, cameraViewRect);
+		_data->tileMap.DrawForegroundLayers(graphics, _data->tileSet, cameraViewRect);
+
+		graphics->UpdateCamera(AllData::MainCamera);
 	}
 }
