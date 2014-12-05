@@ -1,4 +1,5 @@
 #include "LocalMapData.h"
+#include "Utility.h"
 
 using namespace std;
 using namespace Ruin2D;

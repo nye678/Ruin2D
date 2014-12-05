@@ -7,26 +7,14 @@
     <Filter Include="Engine\Graphics">
       <UniqueIdentifier>{86d4d69b-ba34-4e5f-9f40-6c69667aab17}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Resources">
-      <UniqueIdentifier>{7772ac21-a914-465d-9f82-2991fe68a1e0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Engine\States">
       <UniqueIdentifier>{078de3a1-a125-4422-b5db-ed1a03ceb526}</UniqueIdentifier>
     </Filter>
     <Filter Include="Engine\Utility">
       <UniqueIdentifier>{89f17088-d5bb-4c1c-ac26-25e8145e72e6}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Window">
-      <UniqueIdentifier>{00016db2-7c6c-4781-a3d7-8aea7541f495}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Game">
       <UniqueIdentifier>{4f16b2e8-2c6c-4ac3-b323-effe84fe2075}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Data">
-      <UniqueIdentifier>{508c702d-ba7f-4dcb-bf2a-7850b0c0ae59}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\Data\Characters">
-      <UniqueIdentifier>{7ca7f81a-265d-4b2d-93f5-2420a5c0628f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Game\States">
       <UniqueIdentifier>{641586bc-fec1-4e46-83cc-cf36d73db7f2}</UniqueIdentifier>
@@ -37,43 +25,73 @@
     <Filter Include="Engine\Physics">
       <UniqueIdentifier>{a738b83e-d744-477f-893b-70a60bf26854}</UniqueIdentifier>
     </Filter>
+    <Filter Include="CoreSystems">
+      <UniqueIdentifier>{2fca18b2-b3cc-45e5-98b6-ca1b00fd0375}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreSystems\Assertions">
+      <UniqueIdentifier>{bbefb163-24e2-4057-be2b-34d34ed93655}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreSystems\Logging">
+      <UniqueIdentifier>{2ac704f4-30e1-4f4f-ae0c-8d12e9b172ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreSystems\Parsers">
+      <UniqueIdentifier>{cf486192-842a-4554-8499-894bc436dda0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform">
+      <UniqueIdentifier>{9666506f-f6e8-4f4a-bb9e-b1aa190399d1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\FileSystem">
+      <UniqueIdentifier>{05bc563a-cae5-40fa-939f-a59c4702920c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Window">
+      <UniqueIdentifier>{00016db2-7c6c-4781-a3d7-8aea7541f495}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources">
+      <UniqueIdentifier>{7772ac21-a914-465d-9f82-2991fe68a1e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Strings">
+      <UniqueIdentifier>{eed3f263-1887-4c9b-923e-65d53f35366a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\Collections">
+      <UniqueIdentifier>{a8ef5bf0-9e4b-469c-a777-8494a22bffa1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreSystems\Memory">
+      <UniqueIdentifier>{e32afa7c-4f90-43be-82a3-0d0d482a9dee}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\VirtualMemory">
+      <UniqueIdentifier>{8c88d59b-6248-47a1-998c-6e05f2ca2952}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Platform\PlatformDetection">
+      <UniqueIdentifier>{152a45d6-7fa4-4383-80f3-0a8126557eea}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="CoreSystems\Parsers\Images">
+      <UniqueIdentifier>{82376cd0-463f-46b9-abd2-c4aa7349f761}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Assert.h">
-      <Filter>Engine\Utility</Filter>
-    </ClInclude>
     <ClInclude Include="Graphics.h">
       <Filter>Engine\Graphics</Filter>
     </ClInclude>
     <ClInclude Include="WindowManager.h">
-      <Filter>Engine\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Log.h">
-      <Filter>Engine\Utility</Filter>
+      <Filter>Platform\Window</Filter>
     </ClInclude>
     <ClInclude Include="InputManager.h">
-      <Filter>Engine\Window</Filter>
-    </ClInclude>
-    <ClInclude Include="Utility.h">
-      <Filter>Engine\Utility</Filter>
+      <Filter>Platform\Window</Filter>
     </ClInclude>
     <ClInclude Include="GameStateMachine.h">
       <Filter>Engine\States</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="TileSet.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="Font.h">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="TileMap.h">
-      <Filter>Engine\Resources</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Engine\Utility</Filter>
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="Camera.h">
       <Filter>Engine</Filter>
@@ -90,11 +108,44 @@
     <ClInclude Include="LocalMapData.h">
       <Filter>Game\Data</Filter>
     </ClInclude>
+    <ClInclude Include="Assert.h">
+      <Filter>CoreSystems\Assertions</Filter>
+    </ClInclude>
+    <ClInclude Include="Log.h">
+      <Filter>CoreSystems\Logging</Filter>
+    </ClInclude>
+    <ClInclude Include="Utility.h">
+      <Filter>Platform\FileSystem</Filter>
+    </ClInclude>
     <ClInclude Include="TextureManager.h">
-      <Filter>Engine\Graphics</Filter>
+      <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="Sprite.h">
-      <Filter>Engine\Data\Characters</Filter>
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Path.h">
+      <Filter>Platform\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="LinearAllocator.h">
+      <Filter>CoreSystems\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="SystemInfo.h">
+      <Filter>Platform\PlatformDetection</Filter>
+    </ClInclude>
+    <ClInclude Include="VirtualMemory.h">
+      <Filter>Platform\VirtualMemory</Filter>
+    </ClInclude>
+    <ClInclude Include="PngImage.h">
+      <Filter>CoreSystems\Parsers\Images</Filter>
+    </ClInclude>
+    <ClInclude Include="File.h">
+      <Filter>Platform\FileSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="ScopeStack.h">
+      <Filter>CoreSystems\Memory</Filter>
+    </ClInclude>
+    <ClInclude Include="PointerUtils.h">
+      <Filter>CoreSystems\Memory</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -103,31 +154,25 @@
       <Filter>Engine\Graphics</Filter>
     </ClCompile>
     <ClCompile Include="WindowManager.cpp">
-      <Filter>Engine\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Log.cpp">
-      <Filter>Engine\Utility</Filter>
+      <Filter>Platform\Window</Filter>
     </ClCompile>
     <ClCompile Include="InputManager.cpp">
-      <Filter>Engine\Window</Filter>
-    </ClCompile>
-    <ClCompile Include="Utility.cpp">
-      <Filter>Engine\Utility</Filter>
+      <Filter>Platform\Window</Filter>
     </ClCompile>
     <ClCompile Include="GameStateMachine.cpp">
       <Filter>Engine\States</Filter>
     </ClCompile>
     <ClCompile Include="Texture.cpp">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="TileSet.cpp">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="Font.cpp">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="TileMap.cpp">
-      <Filter>Engine\Resources</Filter>
+      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="Camera.cpp">
       <Filter>Engine</Filter>
@@ -144,11 +189,32 @@
     <ClCompile Include="LocalMapData.cpp">
       <Filter>Game\Data</Filter>
     </ClCompile>
+    <ClCompile Include="Log.cpp">
+      <Filter>CoreSystems\Logging</Filter>
+    </ClCompile>
+    <ClCompile Include="Utility.cpp">
+      <Filter>Platform\FileSystem</Filter>
+    </ClCompile>
     <ClCompile Include="TextureManager.cpp">
-      <Filter>Engine\Graphics</Filter>
+      <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="Sprite.cpp">
-      <Filter>Engine\Data\Characters</Filter>
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="LinearAllocator.cpp">
+      <Filter>CoreSystems\Memory</Filter>
+    </ClCompile>
+    <ClCompile Include="SystemInfo.cpp">
+      <Filter>Platform\PlatformDetection</Filter>
+    </ClCompile>
+    <ClCompile Include="VirtualMemory.cpp">
+      <Filter>Platform\VirtualMemory</Filter>
+    </ClCompile>
+    <ClCompile Include="File.cpp">
+      <Filter>Platform\FileSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="ScopeStack.cpp">
+      <Filter>CoreSystems\Memory</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

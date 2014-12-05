@@ -1,5 +1,6 @@
 #include "TileSet.h"
 #include "Utility.h"
+#include "Path.h"
 
 using namespace std;
 using namespace Ruin2D;
@@ -94,8 +95,8 @@ TileSet TileSet::Parse(const string& filepath, const rapidjson::Document &doc, i
 		}
 	}
 
-	string dir = GetDirectoryFromFilepath(filepath);
-	string textureFilepath = CombinePath(dir, tileSetDoc["image"].GetString());
+	string dir = Path::GetDirectoryFromFilepath(filepath);
+	string textureFilepath = Path::CombinePath(dir, tileSetDoc["image"].GetString());
 
 	tileSet._texture = Texture::Load(textureFilepath);
 

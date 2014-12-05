@@ -9,6 +9,8 @@
 #include "Log.h"
 #include "WindowManager.h"
 #include "BootState.h"
+#include "LinearAllocator.h"
+#include "ScopeStack.h"
 
 using namespace Ruin2D;
 using namespace Ruin2DGame;
@@ -26,9 +28,9 @@ TextureManager* textureManager = nullptr;
 int main(int argc, char* argv[])
 {
 	Initialize();
-
+	
 	gsm->PushState(new BootState(gsm));
-
+	
 	Run();
 	Shutdown();
 

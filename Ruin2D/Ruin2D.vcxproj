@@ -48,7 +48,7 @@
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>opengl32.lib;gl3w.lib;glfw3dll.lib;zlibd.lib;libpng16d.lib;freetype253_D.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>opengl32.lib;gl3w.lib;glfw3dll.lib;zlibd.lib;libpng16d.lib;freetype253_D.lib;user32.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalOptions>/NODEFAULTLIB:MSVCRT %(AdditionalOptions)</AdditionalOptions>
     </Link>
   </ItemDefinitionGroup>
@@ -70,41 +70,53 @@
     <ClInclude Include="AllGameData.h" />
     <ClInclude Include="Assert.h" />
     <ClInclude Include="Camera.h" />
+    <ClInclude Include="File.h" />
     <ClInclude Include="Font.h" />
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Graphics.h" />
-    <ClInclude Include="Grid.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LinearAllocator.h" />
     <ClInclude Include="LocalMapData.h" />
     <ClInclude Include="LocalMapState.h" />
     <ClInclude Include="Log.h" />
     <ClInclude Include="BootState.h" />
+    <ClInclude Include="Path.h" />
+    <ClInclude Include="PngImage.h" />
+    <ClInclude Include="PointerUtils.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="ScopeStack.h" />
+    <ClInclude Include="SystemInfo.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
     <ClInclude Include="TileMap.h" />
     <ClInclude Include="TileSet.h" />
     <ClInclude Include="Utility.h" />
+    <ClInclude Include="VirtualMemory.h" />
     <ClInclude Include="WindowManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AllGameData.cpp" />
     <ClCompile Include="BootState.cpp" />
     <ClCompile Include="Camera.cpp" />
+    <ClCompile Include="File.cpp" />
     <ClCompile Include="Font.cpp" />
     <ClCompile Include="Graphics.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LinearAllocator.cpp" />
     <ClCompile Include="LocalMapData.cpp" />
     <ClCompile Include="LocalMapState.cpp" />
     <ClCompile Include="Log.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="GameStateMachine.cpp" />
+    <ClCompile Include="ScopeStack.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SystemInfo.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
     <ClCompile Include="TileMap.cpp" />
     <ClCompile Include="TileSet.cpp" />
     <ClCompile Include="Utility.cpp" />
+    <ClCompile Include="VirtualMemory.cpp" />
     <ClCompile Include="WindowManager.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
