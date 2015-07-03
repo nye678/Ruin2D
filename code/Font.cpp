@@ -1,8 +1,7 @@
 #include "Font.h"
-#include "Assert.h"
+#include "RuinAssert.h"
 
 using namespace std;
-using namespace glm;
 using namespace Ruin2D;
 
 FT_Library Font::FreeType;
@@ -82,8 +81,8 @@ void Font::GenerateGlyph(char c, unsigned char* &atlas)
 
 	FT_GlyphSlot slot = Face->glyph;
 
-	int height = abs(slot->bitmap.rows);
-	int width = abs(slot->bitmap.width);
+	int height = abs((int)slot->bitmap.rows);
+	int width = abs((int)slot->bitmap.width);
 
 	for (int y = 0; py + (y * AtlasSize) < py + (height * AtlasSize); ++y) {
 		for (int x = 0; px + x < px + width; ++x) {
@@ -95,12 +94,12 @@ void Font::GenerateGlyph(char c, unsigned char* &atlas)
 	}
 }
 
-vec2 Font::GetCharacterOffset(char c) const
+glm::vec2 Font::GetCharacterOffset(char c) const
 {
 	return _charOffsets[c];
 }
 
-void Font::DrawString(const string &str, const vec2 &position)
+void Font::DrawString(const string &str, const glm::vec2 &position)
 {
 
 }

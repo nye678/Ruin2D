@@ -43,22 +43,22 @@ namespace Ruin2D
 
 	inline OmniPointer operator+ (OmniPointer lhs, size_t offset)
 	{
-		return lhs.intPtr + offset;
+		return lhs.charPtr + offset;
 	}
 
 	inline OmniPointer operator- (OmniPointer lhs, size_t offset)
 	{
-		return lhs.intPtr - offset;
+		return lhs.charPtr - offset;
 	}
 
 	inline OmniPointer operator+ (OmniPointer lhs, int offset)
 	{
-		return lhs.intPtr + offset;
+		return lhs.charPtr + offset;
 	}
 
 	inline OmniPointer operator- (OmniPointer lhs, int offset)
 	{
-		return lhs.intPtr - offset;
+		return lhs.charPtr - offset;
 	}
 
 	inline bool operator> (OmniPointer lhs, OmniPointer rhs)

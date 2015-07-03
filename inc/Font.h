@@ -2,10 +2,9 @@
 #define __RUIN2D_FONT_H_
 
 #include <string>
-#include <freetype\ft2build.h>
+#include <ft2build.h>
 #include FT_FREETYPE_H
-
-#include <GL3\gl3w.h>
+#include <GL\gl3w.h>
 #include <glm\glm.hpp>
 
 namespace Ruin2D

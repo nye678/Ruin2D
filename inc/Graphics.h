@@ -1,7 +1,7 @@
 #ifndef __RUIN2D_GRAPHICS_H_
 #define __RUIN2D_GRAPHICS_H_
 
-#include <GL3\gl3w.h>
+#include <GL\gl3w.h>
 #include <glm\glm.hpp>
 
 #include "Texture.h"

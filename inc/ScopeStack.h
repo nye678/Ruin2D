@@ -38,7 +38,7 @@ namespace Ruin2D
 
 		// Returns a pointer to the header of an allocated object.
 		// Don't use on PODs!!
-		static ObjectHeader* HeaderFromObjectPointer(void* pointer);
+		static ObjectHeader* HeaderFromObjectPointer(OmniPointer pointer);
 
 		// Calls the destructor for type T objects.
 		template <typename T> static void DestructorCall(void *ptr);

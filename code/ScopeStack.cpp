@@ -45,12 +45,11 @@ ScopeStack::ObjectHeader* ScopeStack::AllocWithHeader(size_t size, size_t count)
 
 void* ScopeStack::ObjectPointerFromHeader(ObjectHeader* header)
 {
-	uintptr_t ptr = reinterpret_cast<uintptr_t>(header) + sizeof(ObjectHeader);
-	return AlignPointerNext(ptr, Alignment);
+	return AlignPointerNext(header + sizeof(ObjectHeader), Alignment);
 }
 
-ScopeStack::ObjectHeader* ScopeStack::HeaderFromObjectPointer(void* pointer)
+ScopeStack::ObjectHeader* ScopeStack::HeaderFromObjectPointer(OmniPointer pointer)
 {
-	uintptr_t ptr = reinterpret_cast<uintptr_t>(pointer) - sizeof(ObjectHeader);
-	return static_cast<ObjectHeader*>(AlignPointerPrev(ptr, Alignment).ptr);
+	OmniPointer ptr = AlignPointerPrev(pointer - sizeof(ObjectHeader), Alignment);
+	return static_cast<ObjectHeader*>(ptr.ptr);
 }

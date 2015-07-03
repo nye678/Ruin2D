@@ -2,7 +2,7 @@
 #define __RUIN2D_TEXTUREMANAGER_H_
 
 #include <string>
-#include <GL3\gl3w.h>
+#include <GL\gl3w.h>
 
 namespace Ruin2D
 {

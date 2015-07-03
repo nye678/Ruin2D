@@ -1,10 +1,10 @@
 #ifndef __RUIN2D_WINDOWMANAGER_H_
 #define __RUIN2D_WINDOWMANAGER_H_
 
-#include <GL3\gl3w.h>
+#include <GL\gl3w.h>
 #include <GLFW\glfw3.h>
 #include <glm\glm.hpp>
-#include "Assert.h"
+#include "RuinAssert.h"
 #include "InputManager.h"
 #include "Log.h"
 

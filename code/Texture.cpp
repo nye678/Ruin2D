@@ -1,5 +1,5 @@
 #include "Texture.h"
-#include "Assert.h"
+#include "RuinAssert.h"
 
 using namespace std;
 using namespace Ruin2D;

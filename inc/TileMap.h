@@ -1,11 +1,11 @@
 #ifndef __RUIN2D_TILEMAP_H_
 #define __RUIN2D_TILEMAP_H_
 
+#include <cassert>
 #include <string>
 #include <glm\glm.hpp>
 #include <rapidjson\document.h>
 #include "TileSet.h"
-
 #include "Graphics.h"
 
 namespace Ruin2D

@@ -9,7 +9,6 @@
 #include "Utility.h"
 
 using namespace std;
-using namespace glm;
 using namespace Ruin2D;
 
 Graphics::Graphics()
@@ -49,52 +48,52 @@ void Graphics::UpdateCamera(Camera* camera)
 
 void Graphics::Draw(const Texture &texture, const glm::vec2 &position, double orientation, short layer, const glm::vec2 &scale, const glm::vec2 &origin)
 {
-	vec2 textureScale = vec2(texture.Width(), texture.Height()) * scale;
+	glm::vec2 textureScale = glm::vec2(texture.Width(), texture.Height()) * scale;
 
-	mat4 transform = mat4(1.0f);
-	transform = translate(transform, vec3(position.x - origin.x, -position.y + origin.y, 0.0f));
-	transform = glm::scale(transform, vec3(textureScale, 1.0f));
-	transform = translate(transform, vec3(0.5f, -0.5f, 0.0f));
-	transform = rotate(transform, (float)orientation, vec3(0.0f, 0.0f, 1.0f));
-	transform = translate(transform, vec3(-0.5f, 0.5f, 0.0f));
+	glm::mat4 transform = glm::mat4(1.0f);
+	transform = glm::translate(transform, glm::vec3(position.x - origin.x, -position.y + origin.y, 0.0f));
+	transform = glm::scale(transform, glm::vec3(textureScale, 1.0f));
+	transform = glm::translate(transform, glm::vec3(0.5f, -0.5f, 0.0f));
+	transform = glm::rotate(transform, (float)orientation, glm::vec3(0.0f, 0.0f, 1.0f));
+	transform = glm::translate(transform, glm::vec3(-0.5f, 0.5f, 0.0f));
 
 	DrawInfo info;
 	info.key = 0;
 	info.zOrder = layer;
 	info.texture = texture.Unit();
 	info.transform = transform;
-	info.uv = mat3(1.0f);
+	info.uv = glm::mat3(1.0f);
 
 	drawBatch.push_back(info);
 }
 
-void Graphics::Draw(const Texture &texture, const vec2 &position, double orientation, short layer, const vec2 &scale)
+void Graphics::Draw(const Texture &texture, const glm::vec2 &position, double orientation, short layer, const glm::vec2 &scale)
 {
-	Draw(texture, position, orientation, layer, scale, vec2(0.0f, 0.0f));
+	Draw(texture, position, orientation, layer, scale, glm::vec2(0.0f, 0.0f));
 }
 
-void Graphics::Draw(const Texture &texture, const vec2 &position, double orientation, short layer)
+void Graphics::Draw(const Texture &texture, const glm::vec2 &position, double orientation, short layer)
 {
-	Draw(texture, position, orientation, layer, vec2(1.0f, 1.0f), vec2(0.0f, 0.0f));
+	Draw(texture, position, orientation, layer, glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
 }
 
-void Graphics::Draw(const Texture &texture, const vec2 &position, double orientation)
+void Graphics::Draw(const Texture &texture, const glm::vec2 &position, double orientation)
 {
-	Draw(texture, position, orientation, 0, vec2(1.0f, 1.0f), vec2(0.0f, 0.0f));
+	Draw(texture, position, orientation, 0, glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
 }
 
-void Graphics::Draw(const Texture &texture, const vec2 &position)
+void Graphics::Draw(const Texture &texture, const glm::vec2 &position)
 {
-	Draw(texture, position, 0.0, 0, vec2(1.0f, 1.0f), vec2(0.0f, 0.0f));
+	Draw(texture, position, 0.0, 0, glm::vec2(1.0f, 1.0f), glm::vec2(0.0f, 0.0f));
 }
 
-void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const vec2 &position)
+void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const glm::vec2 &position)
 {
-	vec2 textureScale = vec2(tileSet.TileWidth(), tileSet.TileHeight());
+	glm::vec2 textureScale = glm::vec2(tileSet.TileWidth(), tileSet.TileHeight());
 
-	mat4 transform = mat4(1.0f);
-	transform = translate(transform, vec3(position.x, -position.y, 0.0f));
-	transform = glm::scale(transform, vec3(textureScale, 1.0f));
+	glm::mat4 transform = glm::mat4(1.0f);
+	transform = glm::translate(transform, glm::vec3(position.x, -position.y, 0.0f));
+	transform = glm::scale(transform, glm::vec3(textureScale, 1.0f));
 
 	DrawInfo info;
 	info.key = 0;
@@ -107,13 +106,13 @@ void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const vec2 &posit
 	drawBatch.push_back(info);
 }
 
-void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const vec2 &position, short layer)
+void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const glm::vec2 &position, short layer)
 {
-	vec2 textureScale = vec2(tileSet.TileWidth(), tileSet.TileHeight());
+	glm::vec2 textureScale = glm::vec2(tileSet.TileWidth(), tileSet.TileHeight());
 
-	mat4 transform = mat4(1.0f);
-	transform = translate(transform, vec3(position.x, -position.y, 0.0f));
-	transform = glm::scale(transform, vec3(textureScale, 1.0f));
+	glm::mat4 transform = glm::mat4(1.0f);
+	transform = glm::translate(transform, glm::vec3(position.x, -position.y, 0.0f));
+	transform = glm::scale(transform, glm::vec3(textureScale, 1.0f));
 
 	DrawInfo info;
 	info.key = layer > 0 ? (((DrawKey)layer) << 48) | (DrawKey)ceil(position.y + tileSet.TileHeight()) : 0;
@@ -132,12 +131,12 @@ void Graphics::Render()
 	glBindVertexArray(vertexArray);
 
 	glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
-	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(mat4), nullptr, GL_DYNAMIC_DRAW);
-	mat4* transforms = static_cast<mat4*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(glm::mat4), nullptr, GL_DYNAMIC_DRAW);
+	glm::mat4* transforms = static_cast<glm::mat4*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 
 	glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
-	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(mat3), nullptr, GL_DYNAMIC_DRAW);
-	mat3* uvs = static_cast<mat3*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(glm::mat3), nullptr, GL_DYNAMIC_DRAW);
+	glm::mat3* uvs = static_cast<glm::mat3*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 
 	auto spriteItor = drawBatch.begin();
 	auto textureBuckets = std::vector<DrawCmd>();
@@ -155,8 +154,8 @@ void Graphics::Render()
 			count = 0;
 		}
 
-		memcpy(transforms + index, value_ptr(spriteItor->transform), sizeof(mat4));
-		memcpy(uvs + index, value_ptr(spriteItor->uv), sizeof(mat3));
+		memcpy(transforms + index, glm::value_ptr(spriteItor->transform), sizeof(glm::mat4));
+		memcpy(uvs + index, value_ptr(spriteItor->uv), sizeof(glm::mat3));
 		++index;
 		++count;
 	}
@@ -192,8 +191,9 @@ void Graphics::RenderText()
 	glUseProgram(textShader);
 	glBindVertexArray(textVAO);
 
-	mat4 transform = scale(translate(mat4(1.0f), vec3(100.0f, 100.0f, 0.0f)), vec3(1.0f));
-	glUniformMatrix4fv(textTransformLoc, 1, GL_FALSE, value_ptr(transform));
+	glm::mat4 transform = glm::scale(glm::translate(glm::mat4(1.0f), glm::vec3(100.0f, 100.0f, 0.0f)), glm::vec3(1.0f));
+
+	glUniformMatrix4fv(textTransformLoc, 1, GL_FALSE, glm::value_ptr(transform));
 
 	glActiveTexture(GL_TEXTURE1);
 
@@ -205,38 +205,38 @@ void Graphics::BufferText(const Font &font, const string &text)
 	if (text.size() < 1) return;
 
 	glBindBuffer(GL_ARRAY_BUFFER, textBuffer);
-	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(vec4), nullptr, GL_DYNAMIC_DRAW);
-	vec4* textBuf = static_cast<vec4*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
+	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(glm::vec4), nullptr, GL_DYNAMIC_DRAW);
+	glm::vec4* textBuf = static_cast<glm::vec4*>(glMapBuffer(GL_ARRAY_BUFFER, GL_WRITE_ONLY));
 
 	float advance = 0.0f;
 	int boffset = 0;
 
-	for (uint i = 0; i < text.size(); ++i)
+	for (uint32_t i = 0; i < text.size(); ++i)
 	{
 		//FT_UInt charIndex = FT_Get_Char_Index(mFace, text.text[i]);
 		//FT_Load_Glyph(mFace, charIndex, 0);
 		//FT_Render_Glyph(mFace->glyph, FT_RENDER_MODE_NORMAL);
 
-		vec2 charOffset = font.GetCharacterOffset(text[i]);
+		glm::vec2 charOffset = font.GetCharacterOffset(text[i]);
 		float yoffset = 32 - charOffset.y;
 
-		mat4 transform = scale(mat4(1.0f), vec3((float)32, (float)32, 1.0f));
-		transform = translate(transform, vec3(advance / 32, yoffset / 32, 0.0f));
+		glm::mat4 transform = glm::scale(glm::mat4(1.0f), glm::vec3((float)32, (float)32, 1.0f));
+		transform = glm::translate(transform, glm::vec3(advance / 32, yoffset / 32, 0.0f));
 
 		float x = (float)(text[i] % 16);
 		float y = (float)(int)floor((float)text[i] / 16.0f);
 
-		vec4 v1 = transform * vec4(0.0f, 0.0f, 0.0f, 1.0f);
-		vec4 v2 = transform * vec4(1.0f, 0.0f, 0.0f, 1.0f);
-		vec4 v3 = transform * vec4(0.0f, 1.0f, 0.0f, 1.0f);
-		vec4 v4 = transform * vec4(1.0f, 1.0f, 0.0f, 1.0f);
+		glm::vec4 v1 = transform * glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
+		glm::vec4 v2 = transform * glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+		glm::vec4 v3 = transform * glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
+		glm::vec4 v4 = transform * glm::vec4(1.0f, 1.0f, 0.0f, 1.0f);
 
-		textBuf[boffset + 0] = (vec4(v1.x, v1.y, x / 16.0f, y / 16.0f));
-		textBuf[boffset + 1] = (vec4(v3.x, v3.y, x / 16.0f, y / 16.0f + 1.0f / 16.0f));
-		textBuf[boffset + 2] = (vec4(v2.x, v2.y, x / 16.0f + 1.0f / 16.0f, y / 16.0f));
-		textBuf[boffset + 3] = (vec4(v2.x, v2.y, x / 16.0f + 1.0f / 16.0f, y / 16.0f));
-		textBuf[boffset + 4] = (vec4(v3.x, v3.y, x / 16.0f, y / 16.0f + 1.0f / 16.0f));
-		textBuf[boffset + 5] = (vec4(v4.x, v4.y, x / 16.0f + 1.0f / 16.0f, y / 16.0f + 1.0f / 16.0f));
+		textBuf[boffset + 0] = (glm::vec4(v1.x, v1.y, x / 16.0f, y / 16.0f));
+		textBuf[boffset + 1] = (glm::vec4(v3.x, v3.y, x / 16.0f, y / 16.0f + 1.0f / 16.0f));
+		textBuf[boffset + 2] = (glm::vec4(v2.x, v2.y, x / 16.0f + 1.0f / 16.0f, y / 16.0f));
+		textBuf[boffset + 3] = (glm::vec4(v2.x, v2.y, x / 16.0f + 1.0f / 16.0f, y / 16.0f));
+		textBuf[boffset + 4] = (glm::vec4(v3.x, v3.y, x / 16.0f, y / 16.0f + 1.0f / 16.0f));
+		textBuf[boffset + 5] = (glm::vec4(v4.x, v4.y, x / 16.0f + 1.0f / 16.0f, y / 16.0f + 1.0f / 16.0f));
 
 		//advance += mFace->glyph->advance.x >> 6;
 		advance += charOffset.x;
@@ -278,7 +278,7 @@ void Graphics::InitializeBuffers()
 
 	glGenBuffers(1, &transformBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, transformBuffer);
-	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(mat4), nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(glm::mat4), nullptr, GL_DYNAMIC_DRAW);
 
 	for (int i = 0; i < 4; i++)
 	{
@@ -289,12 +289,12 @@ void Graphics::InitializeBuffers()
 
 	glGenBuffers(1, &uvBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, uvBuffer);
-	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(mat3), nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(glm::mat3), nullptr, GL_DYNAMIC_DRAW);
 
 	for (int i = 0; i < 3; i++)
 	{
 		glEnableVertexAttribArray(uvLoc + i);
-		glVertexAttribPointer(uvLoc + i, 3, GL_FLOAT, GL_FALSE, sizeof(mat3), (const GLvoid*)(sizeof(GLfloat) * i * 3));
+		glVertexAttribPointer(uvLoc + i, 3, GL_FLOAT, GL_FALSE, sizeof(glm::mat3), (const GLvoid*)(sizeof(GLfloat) * i * 3));
 		glVertexAttribDivisor(uvLoc + i, 1);
 	}
 
@@ -329,18 +329,19 @@ void Graphics::InitializeBuffers()
 
 	glGenBuffers(1, &textBuffer);
 	glBindBuffer(GL_ARRAY_BUFFER, textBuffer);
-	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(vec4), nullptr, GL_DYNAMIC_DRAW);
+	glBufferData(GL_ARRAY_BUFFER, MaxSprites * sizeof(glm::vec4), nullptr, GL_DYNAMIC_DRAW);
 	glEnableVertexAttribArray(textPosLoc);
 	glEnableVertexAttribArray(textUVLoc);
-	glVertexAttribPointer(textPosLoc, 2, GL_FLOAT, GL_FALSE, sizeof(vec4), nullptr);
-	glVertexAttribPointer(textUVLoc, 2, GL_FLOAT, GL_FALSE, sizeof(vec4), (void*)(sizeof(GL_FLOAT) * 2));
+	glVertexAttribPointer(textPosLoc, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec4), nullptr);
+	glVertexAttribPointer(textUVLoc, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec4), (void*)(sizeof(GL_FLOAT) * 2));
 
-	vec4 textColor = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	glm::vec4 textColor = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
 	glUniform4fv(textColorLoc, 1, value_ptr(textColor));
 
-	mat4 orthoMat = glm::ortho(0.0f, -1.0f, 1.0f, 0.0f, 0.01f, 1000.0f);
-	orthoMat *= lookAt(vec3(0.0f, 0.0f, -1.0f), vec3(0.0f), vec3(0.0f, 1.0f, 0.0f));
-	orthoMat = scale(orthoMat, vec3(1.0f / 1024.0f, 1.0f / 768.0f, 1.0f));
+	glm::mat4 orthoMat = glm::ortho(0.0f, -1.0f, 1.0f, 0.0f, 0.01f, 1000.0f);
+	orthoMat *= glm::lookAt(glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
+	orthoMat = glm::scale(orthoMat, glm::vec3(1.0f / 1024.0f, 1.0f / 768.0f, 1.0f));
+
 	glUniformMatrix4fv(textOrthoLoc, 1, GL_FALSE, value_ptr(orthoMat));
 
 	glUniform1i(textFontTexLoc, 1);
@@ -386,7 +387,7 @@ GLuint Graphics::CompileShader(GLenum type, const char* code)
 		string errorString = string(errors);
 		delete errors;
 
-		Assert_Fail(errorString);
+		Assert_Fail(errorString.c_str());
 	}
 
 	return handle;

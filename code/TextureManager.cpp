@@ -1,7 +1,7 @@
 #include "TextureManager.h"
 
-#include <libpng\png.h>
-#include "Assert.h"
+#include <png.h>
+#include "RuinAssert.h"
 
 using namespace std;
 using namespace Ruin2D;

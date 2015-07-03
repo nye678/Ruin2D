@@ -1,9 +1,9 @@
 #ifndef __RUIN2D_TILESET_H_
 #define __RUIN2D_TILESET_H_
 
+#include <cassert>
 #include <string>
 #include <glm\glm.hpp>
-
 #include <rapidjson\document.h>
 #include "Texture.h"
 

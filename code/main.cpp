@@ -28,7 +28,6 @@ TextureManager* textureManager = nullptr;
 int main(int argc, char* argv[])
 {
 	Initialize();
-	
 	gsm->PushState(new BootState(gsm));
 	
 	Run();

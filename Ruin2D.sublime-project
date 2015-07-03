@@ -1,0 +1,16 @@
+{
+	"folders":
+	[
+		{
+			"path": "."
+		}
+	],
+	"build_systems":
+	[
+		{
+			"name": "Ruin2D",
+			"working_dir": "$project_path",
+			"shell_cmd": "call build.bat"
+		},
+	]
+}

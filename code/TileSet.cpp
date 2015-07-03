@@ -1,13 +1,15 @@
 #include "TileSet.h"
 #include "Utility.h"
 #include "Path.h"
+#include <cassert>
 
 using namespace std;
 using namespace Ruin2D;
 
 TileSet::TileSet()
 	: _tileWidth(0), _tileHeight(0), _rows(0), _columns(0), _properties(nullptr)
-{}
+{
+}
 
 GLuint TileSet::Handle() const
 {

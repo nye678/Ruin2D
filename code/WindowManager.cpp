@@ -1,7 +1,6 @@
 #include "WindowManager.h"
 
 using namespace std;
-using namespace glm;
 using namespace Ruin2D;
 
 InputManager* WindowManager::Input = nullptr;
@@ -10,24 +9,24 @@ WindowManager::WindowManager()
 	: _window(nullptr)
 {}
 
-ivec2 WindowManager::GetDesktopSize()
+glm::ivec2 WindowManager::GetDesktopSize()
 {
 	auto monitor = glfwGetPrimaryMonitor();
 	auto monitorInfo = glfwGetVideoMode(monitor);
 	
-	ivec2 size;
+	glm::ivec2 size(0, 0);
 	size.x = monitorInfo->width;
 	size.y = monitorInfo->height;
 
 	return size;
 }
 
-ivec2 WindowManager::GetSize()
+glm::ivec2 WindowManager::GetSize()
 {
 	int width = 0, height = 0;
 	glfwGetWindowSize(_window, &width, &height);
 
-	ivec2 size;
+	glm::ivec2 size;
 	size.x = width;
 	size.y = height;
 
@@ -129,7 +128,7 @@ void WindowManager::CreateNewWindow(int width, int height, const char* title)
 		glfwMakeContextCurrent(window);
 
 		int result = gl3wInit();
-		Assert(result != -1, "Failed to initialize OpenGL");
+		Assert(result, "Failed to initialize OpenGL");
 
 		glfwSetKeyCallback(window, KeyInputCallback);
 

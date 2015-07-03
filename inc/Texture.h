@@ -2,7 +2,7 @@
 #define __RUIN2D_TEXTURE_H_
 
 #include <string>
-#include <GL3\gl3w.h>
+#include <GL\gl3w.h>
 #include <libpng\png.h>
 #include "TextureManager.h"
 
