@@ -10,4 +10,5 @@ void main()
 {
 	vec4 texColor = texture(spriteTex, uv);
 	end_color = texColor;
+    //end_color = vec4(1.0);
 }

@@ -86,6 +86,8 @@ namespace Ruin2D
 
 		std::vector<DrawInfo> drawBatch;
 		std::vector<DrawInfo> textBatch;
+
+		GLuint testShader;
 	public:
 		/* Sets the color that will used to clear the screen with each frame. */
 		void SetClearColor(float r, float g, float b);
@@ -141,6 +143,8 @@ namespace Ruin2D
 
 		/* Gets the location of a shader attribute or uniform. */
 		GLint GetShaderLocation(GLuint program, const char* name);
+
+		void testRender();
 
 	public:
 		Graphics();

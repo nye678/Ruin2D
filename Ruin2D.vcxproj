@@ -5,25 +5,49 @@
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{42695E6D-967F-4205-9DD2-0B6E369CAE20}</ProjectGuid>
-    <Keyword>MakeFileProj</Keyword>
+    <ProjectGuid>{68233A83-23EE-40B2-A437-E3228B449DAB}</ProjectGuid>
+    <RootNamespace>Ruin2D</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Makefile</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Makefile</ConfigurationType>
+    <ConfigurationType>Application</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v120</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
@@ -31,38 +55,127 @@
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
-    <NMakeOutput>build\Ruin2D.exe</NMakeOutput>
-    <NMakeCleanCommandLine>clean.bat</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>clean.bat &amp;&amp; build.bat</NMakeReBuildCommandLine>
-    <NMakePreprocessorDefinitions>WIN32;_DEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)build</OutDir>
-    <IntDir>$(SolutionDir)build</IntDir>
-    <NMakeForcedIncludes>D:\Projects\Ruin2D\code;$(NMakeForcedIncludes)</NMakeForcedIncludes>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <NMakeBuildCommandLine>build.bat</NMakeBuildCommandLine>
-    <NMakeOutput>build\Ruin2D.exe</NMakeOutput>
-    <NMakeCleanCommandLine>clean.bat</NMakeCleanCommandLine>
-    <NMakeReBuildCommandLine>clean.bat &amp;&amp; build.bat</NMakeReBuildCommandLine>
-    <NMakePreprocessorDefinitions>WIN32;NDEBUG;$(NMakePreprocessorDefinitions)</NMakePreprocessorDefinitions>
-    <OutDir>$(SolutionDir)build</OutDir>
-    <IntDir>$(SolutionDir)build</IntDir>
-    <NMakeForcedIncludes>D:\Projects\Ruin2D\code;$(NMakeForcedIncludes)</NMakeForcedIncludes>
-  </PropertyGroup>
-  <ItemDefinitionGroup>
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>.\inc;..\lib\rapidjson-0.11\rapidjson\include;..\lib\freetype-2.6\include;..\lib\lpng1617;D:\Projects\Ruin2D\lib\gl3w\include;..\lib\glfw\include;..\lib\glm\build\vstudio\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>..\lib\freetype-2.6\x64\Release;..\lib\lpng1617\projects\vstudio\x64\Release Library;..\lib\gl3w\build\Debug;..\lib\glfw\build\src\Release;D:\Projects\Ruin2D\lib\lpng1617\projects\vstudio\x64\Release Library;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>zlib.lib;libpng16.lib;freetype.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+    </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <Text Include="readme.txt" />
+    <ClCompile Include="code\AllGameData.cpp" />
+    <ClCompile Include="code\BitMap.cpp" />
+    <ClCompile Include="code\BootState.cpp" />
+    <ClCompile Include="code\Camera.cpp" />
+    <ClCompile Include="code\File.cpp" />
+    <ClCompile Include="code\Font.cpp" />
+    <ClCompile Include="code\GameStateMachine.cpp" />
+    <ClCompile Include="code\Graphics.cpp" />
+    <ClCompile Include="code\InputManager.cpp" />
+    <ClCompile Include="code\LinearAllocator.cpp" />
+    <ClCompile Include="code\LocalMapData.cpp" />
+    <ClCompile Include="code\LocalMapState.cpp" />
+    <ClCompile Include="code\Log.cpp" />
+    <ClCompile Include="code\main.cpp" />
+    <ClCompile Include="code\MemManager.cpp" />
+    <ClCompile Include="code\RuinAssert.cpp" />
+    <ClCompile Include="code\ScopeStack.cpp" />
+    <ClCompile Include="code\Sprite.cpp" />
+    <ClCompile Include="code\SystemInfo.cpp" />
+    <ClCompile Include="code\Texture.cpp" />
+    <ClCompile Include="code\TextureManager.cpp" />
+    <ClCompile Include="code\TileMap.cpp" />
+    <ClCompile Include="code\TileSet.cpp" />
+    <ClCompile Include="code\Utility.cpp" />
+    <ClCompile Include="code\VirtualMemory.cpp" />
+    <ClCompile Include="code\WindowManager.cpp" />
+    <ClCompile Include="lib\gl3w\src\gl3w.c" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="build.bat" />
-    <None Include="clean.bat" />
+    <ClInclude Include="inc\AllGameData.h" />
+    <ClInclude Include="inc\BitMath.h" />
+    <ClInclude Include="inc\BootState.h" />
+    <ClInclude Include="inc\Camera.h" />
+    <ClInclude Include="inc\File.h" />
+    <ClInclude Include="inc\Font.h" />
+    <ClInclude Include="inc\GameData.h" />
+    <ClInclude Include="inc\GameStateMachine.h" />
+    <ClInclude Include="inc\Graphics.h" />
+    <ClInclude Include="inc\InputManager.h" />
+    <ClInclude Include="inc\LinearAllocator.h" />
+    <ClInclude Include="inc\LocalMapData.h" />
+    <ClInclude Include="inc\LocalMapState.h" />
+    <ClInclude Include="inc\Log.h" />
+    <ClInclude Include="inc\MemManager.h" />
+    <ClInclude Include="inc\Path.h" />
+    <ClInclude Include="inc\PngImage.h" />
+    <ClInclude Include="inc\PointerUtils.h" />
+    <ClInclude Include="inc\RuinAssert.h" />
+    <ClInclude Include="inc\ScopeStack.h" />
+    <ClInclude Include="inc\Sprite.h" />
+    <ClInclude Include="inc\SystemInfo.h" />
+    <ClInclude Include="inc\Texture.h" />
+    <ClInclude Include="inc\TextureManager.h" />
+    <ClInclude Include="inc\TileMap.h" />
+    <ClInclude Include="inc\TileSet.h" />
+    <ClInclude Include="inc\Utility.h" />
+    <ClInclude Include="inc\VirtualMemory.h" />
+    <ClInclude Include="inc\WindowManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,6 +1,6 @@
 #include "TextureManager.h"
 
-#include <png.h>
+#include <libpng\png.h>
 #include "RuinAssert.h"
 
 using namespace std;
@@ -84,7 +84,7 @@ TextureInfo TextureManager::LoadTexture(const string &filepath)
 	png_byte color_type = png_get_color_type(png_ptr, info_ptr);
 	png_byte bit_depth = png_get_bit_depth(png_ptr, info_ptr);
 
-	int rowBytes = png_get_rowbytes(png_ptr, info_ptr);
+	int rowBytes = (int)png_get_rowbytes(png_ptr, info_ptr);
 
 	rowBytes += 3 - ((rowBytes - 1) % 4);
 

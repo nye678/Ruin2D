@@ -7,7 +7,8 @@ Camera::Camera()
 	: _position(glm::vec2(0.0f, 0.0f)), _dirty(true), _zoom(2.0f)
 {
 	// Hack window size
-	_proj = glm::ortho(0.0f, (float)1024, (float)-768, 0.0f, 0.1f, 10000.0f);
+	//_proj = glm::ortho(0.0f, (float)1024, (float)-768, 0.0f, 0.1f, 10000.0f);
+	_proj = glm::ortho(0.0f, 1024.0f, -768.0f, 0.0f);
 	_camera = glm::mat4(1.0);
 }
 
@@ -51,6 +52,7 @@ void Camera::UpdateCameraView(GLint cameraLocation)
 	if (_dirty)
 	{
 		_camera = glm::scale(glm::mat4(1.0), glm::vec3(_zoom, _zoom, 0.0f)) * glm::translate(glm::mat4(1.0), glm::vec3(_position, 0.0f));
+		//_camera = glm::mat4(1.0f);
 		//auto cameraView = translate(_cameraView, vec3(_position, 0.0f));
 		//cameraView = scale(cameraView, vec3(_zoom, _zoom, 0.0f));
 		auto cameraView = _proj * _camera;

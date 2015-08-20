@@ -28,6 +28,12 @@ void Graphics::StartBatch()
 	drawBatch.clear();
 }
 
+void Graphics::testRender()
+{
+	glUseProgram(testShader);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+}
+
 void Graphics::EndBatch()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -36,6 +42,7 @@ void Graphics::EndBatch()
 	{
 		sort(drawBatch.begin(), drawBatch.end(), DrawInfoCompare());
 		Render();
+		//testRender();
 	}
 
 	//RenderText();
@@ -108,7 +115,7 @@ void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const glm::vec2 &
 
 void Graphics::DrawTile(const TileSet &tileSet, int tileIndex, const glm::vec2 &position, short layer)
 {
-	glm::vec2 textureScale = glm::vec2(tileSet.TileWidth(), tileSet.TileHeight());
+ 	glm::vec2 textureScale = glm::vec2(tileSet.TileWidth(), tileSet.TileHeight());
 
 	glm::mat4 transform = glm::mat4(1.0f);
 	transform = glm::translate(transform, glm::vec3(position.x, -position.y, 0.0f));
@@ -144,6 +151,8 @@ void Graphics::Render()
 	GLint currentUnit = spriteItor->unit;
 	int index = 0, prevIndex = 0, count = 0;
 
+	glm::mat4 testblerg = glm::mat4(1.0f);
+
 	for (; spriteItor != drawBatch.end(); ++spriteItor)
 	{
 		if (spriteItor->texture != currentTexture)
@@ -155,7 +164,7 @@ void Graphics::Render()
 		}
 
 		memcpy(transforms + index, glm::value_ptr(spriteItor->transform), sizeof(glm::mat4));
-		memcpy(uvs + index, value_ptr(spriteItor->uv), sizeof(glm::mat3));
+		memcpy(uvs + index, glm::value_ptr(spriteItor->uv), sizeof(glm::mat3));
 		++index;
 		++count;
 	}
@@ -257,8 +266,10 @@ void Graphics::InitializeBuffers()
 	char* fragShaderCode = nullptr;
 	size_t read = 0;
 	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\DefaultTileShader.vert", vertShaderCode);
+	//read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\TestTriangleShader.vert", vertShaderCode);
 	Assert(read != 0, "Failed to read the vert shader file");
 	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\DefaultTileShader.frag", fragShaderCode);
+	//read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\TestTriangleShader.frag", fragShaderCode);
 	Assert(read != 0, "Failed to read the frag shader file");
 
 	shader = CreateBasicShader(vertShaderCode, fragShaderCode);
@@ -336,17 +347,26 @@ void Graphics::InitializeBuffers()
 	glVertexAttribPointer(textUVLoc, 2, GL_FLOAT, GL_FALSE, sizeof(glm::vec4), (void*)(sizeof(GL_FLOAT) * 2));
 
 	glm::vec4 textColor = glm::vec4(0.0f, 0.0f, 0.0f, 1.0f);
-	glUniform4fv(textColorLoc, 1, value_ptr(textColor));
+	glUniform4fv(textColorLoc, 1, glm::value_ptr(textColor));
 
 	glm::mat4 orthoMat = glm::ortho(0.0f, -1.0f, 1.0f, 0.0f, 0.01f, 1000.0f);
 	orthoMat *= glm::lookAt(glm::vec3(0.0f, 0.0f, -1.0f), glm::vec3(0.0f), glm::vec3(0.0f, 1.0f, 0.0f));
 	orthoMat = glm::scale(orthoMat, glm::vec3(1.0f / 1024.0f, 1.0f / 768.0f, 1.0f));
 
-	glUniformMatrix4fv(textOrthoLoc, 1, GL_FALSE, value_ptr(orthoMat));
+	glUniformMatrix4fv(textOrthoLoc, 1, GL_FALSE, glm::value_ptr(orthoMat));
 
 	glUniform1i(textFontTexLoc, 1);
 
 	glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+	char* testVertShaderCode = nullptr;
+	char* testFragShaderCode = nullptr;
+	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\TestTriangleShader.vert", testVertShaderCode);
+	Assert(read != 0, "Failed to read the test vert shader file");
+	read = LoadTextFile("D:\\Projects\\Ruin2D\\Data\\Shaders\\TestTriangleShader.frag", testFragShaderCode);
+	Assert(read != 0, "Failed to read the test frag shader file");
+
+	testShader = CreateBasicShader(testVertShaderCode, testFragShaderCode);
 }
 
 GLuint Graphics::CreateBasicShader(const char* vertexCode, const char* fragmentCode)

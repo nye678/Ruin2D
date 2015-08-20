@@ -128,7 +128,7 @@ void WindowManager::CreateNewWindow(int width, int height, const char* title)
 		glfwMakeContextCurrent(window);
 
 		int result = gl3wInit();
-		Assert(result, "Failed to initialize OpenGL");
+		Assert(!result, "Failed to initialize OpenGL");
 
 		glfwSetKeyCallback(window, KeyInputCallback);
 

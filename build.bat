@@ -24,16 +24,3 @@ opengl32.lib user32.lib gdi32.lib shell32.lib ^
 /libpath:"..\lib\lpng1617\projects\vstudio\x64\Release Library"
 
 popd
-
-rem kernel32.lib
-rem user32.lib
-rem gdi32.lib
-rem winspool.lib
-rem comdlg32.lib
-rem advapi32.lib
-rem shell32.lib
-rem ole32.lib
-rem oleaut32.lib
-rem uuid.lib
-rem odbc32.lib
-rem odbccp32.lib

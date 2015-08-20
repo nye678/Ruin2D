@@ -71,10 +71,10 @@ void TileMap::DrawMapSection(Graphics* graphics, const TileSet &tileSet, const g
 	auto topleft = WorldToGrid(-rect.x, rect.y);
 	auto bottomright = WorldToGrid(rect.z, rect.w);
 
-	int firstRow = max(topleft.y, 0);
-	int firstCol = max(topleft.x, 0);
-	int lastRow = min(bottomright.y + topleft.y + 1, _height);
-	int lastCol = min(bottomright.x + topleft.x + 1, _width);
+	int firstRow = glm::max(topleft.y, 0);
+	int firstCol = glm::max(topleft.x, 0);
+	int lastRow = glm::min(bottomright.y + topleft.y + 1, _height);
+	int lastCol = glm::min(bottomright.x + topleft.x + 1, _width);
 
 	if (layerIndex < _numlayers)
 	{

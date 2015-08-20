@@ -1,28 +1,63 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Source Files">
-      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
-      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
-    </Filter>
-    <Filter Include="Header Files">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
-    </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
+    <ClCompile Include="code\AllGameData.cpp" />
+    <ClCompile Include="code\BitMap.cpp" />
+    <ClCompile Include="code\BootState.cpp" />
+    <ClCompile Include="code\Camera.cpp" />
+    <ClCompile Include="code\File.cpp" />
+    <ClCompile Include="code\Font.cpp" />
+    <ClCompile Include="code\GameStateMachine.cpp" />
+    <ClCompile Include="code\Graphics.cpp" />
+    <ClCompile Include="code\InputManager.cpp" />
+    <ClCompile Include="code\LinearAllocator.cpp" />
+    <ClCompile Include="code\LocalMapData.cpp" />
+    <ClCompile Include="code\LocalMapState.cpp" />
+    <ClCompile Include="code\Log.cpp" />
+    <ClCompile Include="code\main.cpp" />
+    <ClCompile Include="code\MemManager.cpp" />
+    <ClCompile Include="code\RuinAssert.cpp" />
+    <ClCompile Include="code\ScopeStack.cpp" />
+    <ClCompile Include="code\Sprite.cpp" />
+    <ClCompile Include="code\SystemInfo.cpp" />
+    <ClCompile Include="code\Texture.cpp" />
+    <ClCompile Include="code\TextureManager.cpp" />
+    <ClCompile Include="code\TileMap.cpp" />
+    <ClCompile Include="code\TileSet.cpp" />
+    <ClCompile Include="code\Utility.cpp" />
+    <ClCompile Include="code\VirtualMemory.cpp" />
+    <ClCompile Include="code\WindowManager.cpp" />
+    <ClCompile Include="lib\gl3w\src\gl3w.c" />
   </ItemGroup>
   <ItemGroup>
-    <Text Include="readme.txt" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="build.bat">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="clean.bat">
-      <Filter>Source Files</Filter>
-    </None>
+    <ClInclude Include="inc\AllGameData.h" />
+    <ClInclude Include="inc\BitMath.h" />
+    <ClInclude Include="inc\BootState.h" />
+    <ClInclude Include="inc\Camera.h" />
+    <ClInclude Include="inc\File.h" />
+    <ClInclude Include="inc\Font.h" />
+    <ClInclude Include="inc\GameData.h" />
+    <ClInclude Include="inc\GameStateMachine.h" />
+    <ClInclude Include="inc\Graphics.h" />
+    <ClInclude Include="inc\InputManager.h" />
+    <ClInclude Include="inc\LinearAllocator.h" />
+    <ClInclude Include="inc\LocalMapData.h" />
+    <ClInclude Include="inc\LocalMapState.h" />
+    <ClInclude Include="inc\Log.h" />
+    <ClInclude Include="inc\MemManager.h" />
+    <ClInclude Include="inc\Path.h" />
+    <ClInclude Include="inc\PngImage.h" />
+    <ClInclude Include="inc\PointerUtils.h" />
+    <ClInclude Include="inc\RuinAssert.h" />
+    <ClInclude Include="inc\ScopeStack.h" />
+    <ClInclude Include="inc\Sprite.h" />
+    <ClInclude Include="inc\SystemInfo.h" />
+    <ClInclude Include="inc\Texture.h" />
+    <ClInclude Include="inc\TextureManager.h" />
+    <ClInclude Include="inc\TileMap.h" />
+    <ClInclude Include="inc\TileSet.h" />
+    <ClInclude Include="inc\Utility.h" />
+    <ClInclude Include="inc\VirtualMemory.h" />
+    <ClInclude Include="inc\WindowManager.h" />
   </ItemGroup>
 </Project>
